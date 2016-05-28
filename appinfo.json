@@ -1,0 +1,60 @@
+{
+  "uuid": "429b7169-3a7d-499b-b825-97f658336774",
+  "shortName": "tennis-poc-menu-c",
+  "longName": "tennis-poc-menu-c",
+  "companyName": "Leeloo Inc.",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite", "basalt", "chalk"],
+  "enableMultiJS": true,
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": [
+      {
+        "type": "bitmap",
+        "name": "TICK_BLACK",
+        "file": "images/tick_black.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "TICK_WHITE",
+        "file": "images/tick_white.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "CONFIRM",
+        "file": "images/confirm.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "CROSS",
+        "file": "images/cross.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "TICK",
+        "file": "images/tick.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "WARNING",
+        "file": "images/warning.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "CONFIG_REQUIRED",
+        "file": "images/config-required.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "NUM_SETS",
+        "file": "images/num-sets.png"
+      }
+    ]
+  }
+}
