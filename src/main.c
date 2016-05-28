@@ -12,6 +12,7 @@
 // #include "windows/dialog_config_window.h"
 
 #include "windows/number_of_sets_window.h"
+#include "windows/who_serves_window.h"
 #include "match/MatchConfiguration.h"
 
 
@@ -20,6 +21,9 @@
 
 #define BEST_OF_3_SETS "3"
 #define BEST_OF_5_SETS "5"
+
+#define OPP_SERVES "Opponent serves"
+#define YOU_SERVE "You serve"
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;
@@ -47,7 +51,12 @@ static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex 
           }        
           break;
       case 1:
-          menu_cell_basic_draw(ctx, cell_layer, "Who serves", "You", NULL);
+          if (match_config_does_opponent_serve())
+          {
+              menu_cell_basic_draw(ctx, cell_layer, "Who serves", OPP_SERVES, NULL);
+          }else{
+              menu_cell_basic_draw(ctx, cell_layer, "Who serves", YOU_SERVE, NULL);
+          }            
           break;
       case 2:
           menu_cell_basic_draw(ctx, cell_layer, "Start match", NULL, NULL);
@@ -106,7 +115,7 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
       number_of_sets_window_push();
       break;
     case 1:
-      // dialog_choice_window_push();
+      who_serves_window_push();
       break;
     case 2:
       // dialog_message_window_push();

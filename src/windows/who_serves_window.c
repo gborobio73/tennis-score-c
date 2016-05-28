@@ -2,7 +2,7 @@
  * Example implementation of the radio button list UI pattern.
  */
 
-#include "number_of_sets_window.h"
+#include "who_serves_window.h"
 #include "../match/MatchConfiguration.h"
 
 static Window *s_main_window;
@@ -16,9 +16,9 @@ static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex 
     // This is a choice item
     static char s_buff[16];    
     if (cell_index->row == 0){
-        snprintf(s_buff, sizeof(s_buff), "Best of 3 sets");
+        snprintf(s_buff, sizeof(s_buff), "Opp serves");
     }else{
-        snprintf(s_buff, sizeof(s_buff), "Best of 5 sets");
+        snprintf(s_buff, sizeof(s_buff), "You serve");
     }
     menu_cell_basic_draw(ctx, cell_layer, s_buff, NULL, NULL);
 
@@ -36,10 +36,10 @@ static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex 
     // Draw radio filled/empty
     graphics_draw_circle(ctx, p, RADIO_BUTTON_WINDOW_RADIO_RADIUS);
 
-    if(cell_index->row == 0 && match_config_is_best_of_3_sets()== true) {
+    if(cell_index->row == 0 && match_config_does_opponent_serve()== true) {
       // This is the selection
       graphics_fill_circle(ctx, p, RADIO_BUTTON_WINDOW_RADIO_RADIUS - 3);
-    }else if(cell_index->row == 1 && match_config_is_best_of_3_sets()== false){
+    }else if(cell_index->row == 1 && match_config_does_opponent_serve()== false){
       // This is the selection
       graphics_fill_circle(ctx, p, RADIO_BUTTON_WINDOW_RADIO_RADIUS - 3);
     }
@@ -55,9 +55,9 @@ static int16_t get_cell_height_callback(struct MenuLayer *menu_layer, MenuIndex 
 static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *callback_context) {
     if (cell_index->row ==0)
     {
-        match_config_set_best_of_3_sets();
+        match_config_set_opponent_serves();
     }else{
-        match_config_set_best_of_5_sets();
+        match_config_set_you_serve();
     }
     menu_layer_reload_data(menu_layer);
     window_stack_pop(true);
@@ -85,7 +85,7 @@ static void window_unload(Window *window) {
   s_main_window = NULL;
 }
 
-void number_of_sets_window_push() {
+void who_serves_window_push() {
   if(!s_main_window) {
     s_main_window = window_create();
     window_set_window_handlers(s_main_window, (WindowHandlers) {
