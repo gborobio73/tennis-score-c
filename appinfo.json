@@ -54,6 +54,11 @@
         "type": "bitmap",
         "name": "NUM_SETS",
         "file": "images/num-sets.png"
+      },
+      {
+        "type": "bitmap",
+        "name": "NUM_SETS_SMALL",
+        "file": "images/num-sets-small.png"
       }
     ]
   }

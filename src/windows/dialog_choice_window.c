@@ -15,7 +15,7 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  s_icon_bitmap = gbitmap_create_with_resource(RESOURCE_ID_CONFIRM);
+  s_icon_bitmap = gbitmap_create_with_resource(RESOURCE_ID_NUM_SETS);
 
   const GEdgeInsets icon_insets = {.top = 7, .right = 28, .bottom = 56, .left = 14};
   s_icon_layer = bitmap_layer_create(grect_inset(bounds, icon_insets));

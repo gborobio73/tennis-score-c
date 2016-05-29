@@ -7,8 +7,13 @@ static int who_serves =opp;
 bool match_config_is_best_of_3_sets(){
 	return best_of_sets == 3;
 }
+
 void match_config_set_best_of_3_sets(){
 	best_of_sets = 3;
+}
+
+int match_config_get_best_of_sets(){
+	return best_of_sets;
 }
 
 void match_config_set_best_of_5_sets(){
@@ -23,4 +28,8 @@ void match_config_set_opponent_serves(){
 }
 void match_config_set_you_serve(){
 	who_serves =you;
+}
+
+int match_config_get_who_serves(){
+	return who_serves;
 }
