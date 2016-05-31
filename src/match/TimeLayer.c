@@ -1,5 +1,5 @@
 #include <pebble.h>
-//#include <time.h>
+//#include <TimeLayer.h>
 
 static TextLayer *s_time_layer;
 static TextLayer *s_match_time_layer;
@@ -15,7 +15,7 @@ void draw_time_layer(TextLayer *layer){
   text_layer_set_text_alignment(layer, GTextAlignmentCenter);
 }
 
-void time_update_time() {
+void time_layer_update_time() {
     // Get a tm structure
     time_t temp = time(NULL);
     struct tm *tick_time = localtime(&temp);
@@ -39,7 +39,7 @@ void time_update_time() {
     text_layer_set_text(s_match_time_layer, match_time_buffer);
 }
 
-void time_init_time_layer(Layer *window_layer){
+void time_layer_init(Layer *window_layer){
     GRect bounds = layer_get_bounds(window_layer);
     //144, 168
     s_time_layer = text_layer_create(
@@ -55,7 +55,7 @@ void time_init_time_layer(Layer *window_layer){
     match_started = time(NULL);
 }
 
-void time_destroy_time_layer(){
+void time_layer_destroy(){
     text_layer_destroy(s_time_layer);  
     text_layer_destroy(s_match_time_layer);
     s_time_layer=NULL;  

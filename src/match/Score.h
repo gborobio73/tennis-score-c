@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdbool.h>
-#include "Time.h"
+#include "TimeLayer.h"
 
 typedef char* Point;
 
@@ -19,4 +19,4 @@ typedef struct
 
 } Score;
 
-void score_copy_to_from(Score* , Score* );
+void score_copy_to_from(Score* , Score*);

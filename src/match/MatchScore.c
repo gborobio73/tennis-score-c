@@ -6,7 +6,7 @@
 #include "Const.h"
 #include "ScoreCalculator.h"
 #include "Score.h"
-#include "Time.h"
+#include "TimeLayer.h"
 #include <pebble.h>
 
 MatchScore match_score;
@@ -43,12 +43,12 @@ void match_schore_init(int who_starts_serving, int best_of_sets){
     match_score.scores[match_score.current_score_idx].time = time(NULL);
 }
 
-bool is_match_over(){
+bool match_score_is_match_over(){
     return match_score.scores[match_score.current_score_idx].match_is_over;
 }
 
 void match_schore_oponent_point(){  
-    if (!is_match_over())
+    if (!match_score_is_match_over())
     {
         match_score_resize_if_needed();        
         score_calculator_calculate_new_from_to(
@@ -60,7 +60,7 @@ void match_schore_oponent_point(){
 }
 
 void match_schore_your_point() {
-    if (!is_match_over())
+    if (!match_score_is_match_over())
     {
         match_score_resize_if_needed();        
         score_calculator_calculate_new_from_to(
@@ -78,7 +78,7 @@ Score* match_schore_get_current_score(){
 }
 
 void match_schore_cancel_last_point(){
-    if (!is_match_over() && match_score.current_score_idx > 0)
+    if (!match_score_is_match_over() && match_score.current_score_idx > 0)
     {
         //free(match_score.scores[current_score_idx]);
         match_score.current_score_idx--;

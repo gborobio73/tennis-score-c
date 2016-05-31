@@ -8,13 +8,13 @@
 #include "../match/MatchScoreLayer.h"
 #include "../match/MatchScore.h"
 #include "../match/Score.h"
-#include "../match/Time.h"
+#include "../match/TimeLayer.h"
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
-  time_update_time();
+  time_layer_update_time();
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -51,7 +51,7 @@ static void window_load(Window *window) {
 
   match_score_layer_draw_score(score);
 
-  time_init_time_layer(window_layer);
+  time_layer_init(window_layer);
 }
 
 static void window_unload(Window *window) {
@@ -61,7 +61,7 @@ static void window_unload(Window *window) {
     s_main_window = NULL;
 
     match_score_layer_destroy();
-    time_destroy_time_layer();
+    time_layer_destroy();
 
     match_schore_end_match();
 }

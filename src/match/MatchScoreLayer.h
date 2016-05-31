@@ -9,7 +9,7 @@ typedef struct
 	TextLayer *s_text_games_layer[2];
 	TextLayer *s_text_sets_layer[2];
 	TextLayer *s_text_who_serves_layer[2];
-	// Layer *s_layer[2];
+	
 } MatchScoreLayer;
 
 void match_score_layer_init(Layer* );
