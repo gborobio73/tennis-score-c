@@ -54,7 +54,7 @@ void new_game (Score* new_score, int who_won){
     }
 }
 
-void calculate_new_score(Score* current_score, int who_won, Score* new_score){
+void score_calculator_calculate_new_from_to(Score* current_score, int who_won, Score* new_score){
 	
 	//Score *new_score = malloc(sizeof(Score));
     //printf("New score with address %p\n", (void*)new_score);
@@ -63,7 +63,7 @@ void calculate_new_score(Score* current_score, int who_won, Score* new_score){
     // 	APP_LOG(APP_LOG_LEVEL_DEBUG, "*** calculate_new_score *** New score allocated with NULL address");
     // }
     // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** calculate_new_score *** New score allocated with address: %p\n", (void*)new_score);
-    copy_score_helper(new_score, current_score);
+    score_copy_to_from(new_score, current_score);
     
 	//work on new_score
     int who_lost = !who_won;

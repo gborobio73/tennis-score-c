@@ -41,7 +41,7 @@ void set_who_serves_layer_design(TextLayer* layer){
 	text_layer_set_background_color(layer, GColorShockingPink);
 }
 
-void init_match_score_layer(Layer *window_layer){
+void match_score_layer_init(Layer *window_layer){
 	//Who serves
 	match_score_layer.s_text_who_serves_layer[opp] = text_layer_create(GRect(123, 51, 24, 32));
 	text_layer_set_text(match_score_layer.s_text_who_serves_layer[opp], ".");
@@ -86,7 +86,7 @@ void init_match_score_layer(Layer *window_layer){
   	layer_add_child(window_layer, text_layer_get_layer(match_score_layer.s_text_who_serves_layer[you]));
 }
 
-MatchScoreLayer get_match_score_layer(){
+MatchScoreLayer match_score_layer_get(){
 	return match_score_layer;
 } 
 
@@ -132,7 +132,7 @@ void match_score_layer_draw_score(Score* score){
 	draw_points_games_and_sets(score);	
 }
 
-void destroy_match_score_layer(){
+void match_score_layer_destroy(){
 	text_layer_destroy(match_score_layer.s_text_points_layer[opp]);	 
 	text_layer_destroy(match_score_layer.s_text_points_layer[you]);	 
 	text_layer_destroy(match_score_layer.s_text_games_layer[opp]);	 

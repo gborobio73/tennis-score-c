@@ -18,20 +18,20 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  cancel_last_point();
-  Score* score = get_current_score(); 
+  match_schore_cancel_last_point();
+  Score* score = match_schore_get_current_score(); 
   match_score_layer_draw_score(score);
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-  oponentPoint();
-  Score* score = get_current_score(); 
+  match_schore_oponent_point();
+  Score* score = match_schore_get_current_score(); 
   match_score_layer_draw_score(score);
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  yourPoint();
-  Score* score = get_current_score(); 
+  match_schore_your_point();
+  Score* score = match_schore_get_current_score(); 
   match_score_layer_draw_score(score);
 }
 
@@ -44,10 +44,10 @@ static void click_config_provider(void *context) {
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   
-  init_match_score_layer(window_layer);
+  match_score_layer_init(window_layer);
 
-  init_match_schore(match_config_get_who_serves(), match_config_get_best_of_sets());
-  Score* score = get_current_score();
+  match_schore_init(match_config_get_who_serves(), match_config_get_best_of_sets());
+  Score* score = match_schore_get_current_score();
 
   match_score_layer_draw_score(score);
 
@@ -60,10 +60,10 @@ static void window_unload(Window *window) {
     window_destroy(window);
     s_main_window = NULL;
 
-    destroy_match_score_layer();
+    match_score_layer_destroy();
     time_destroy_time_layer();
 
-    end_match();
+    match_schore_end_match();
 }
 
 void match_window_push() {

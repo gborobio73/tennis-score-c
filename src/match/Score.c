@@ -2,7 +2,7 @@
 #include "Score.h"
 #include "Time.h"
 
-void copy_score_helper(Score* destination_score, Score* source_score){
+void score_copy_to_from(Score* destination_score, Score* source_score){
 
 	destination_score->is_tie_break = source_score->is_tie_break;
     destination_score->match_is_over = source_score->match_is_over;

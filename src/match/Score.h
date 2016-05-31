@@ -20,6 +20,6 @@ typedef struct
 
 } Score;
 
-void copy_score_helper(Score* , Score* );
+void score_copy_to_from(Score* , Score* );
 
 #endif

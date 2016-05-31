@@ -13,10 +13,10 @@ typedef struct
 	// Layer *s_layer[2];
 } MatchScoreLayer;
 
-void init_match_score_layer(Layer* );
-void destroy_match_score_layer();
+void match_score_layer_init(Layer* );
+void match_score_layer_destroy();
 
-MatchScoreLayer get_match_score_layer(); 
+MatchScoreLayer match_score_layer_get(); 
 
 void match_score_layer_draw_score(Score* );
 
