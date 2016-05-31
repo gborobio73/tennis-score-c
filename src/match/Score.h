@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "Time.h"
 
 #ifndef SCORE_H
 #define SCORE_H
@@ -15,6 +16,7 @@ typedef struct
     Point points [2];
     int tie_break_points [2];
     int best_of_sets;
+    time_t time;
 
 } Score;
 

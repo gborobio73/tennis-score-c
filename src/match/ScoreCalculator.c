@@ -54,9 +54,9 @@ void new_game (Score* new_score, int who_won){
     }
 }
 
-Score* calculate_new_score(Score* current_score, int who_won){
+void calculate_new_score(Score* current_score, int who_won, Score* new_score){
 	
-	Score *new_score = malloc(sizeof(Score));
+	//Score *new_score = malloc(sizeof(Score));
     //printf("New score with address %p\n", (void*)new_score);
     // if (new_score == NULL)
     // {
@@ -74,13 +74,21 @@ Score* calculate_new_score(Score* current_score, int who_won){
 			// printf("Continue, who_won had less or equal than 5 %d\n", new_score->tie_break_points[who_won]);
 			new_score->tie_break_points[who_won]++;			
 			// printf("now has%d\n", new_score->tie_break_points[who_won]);	
+			int total_points =new_score->tie_break_points[who_won] + new_score->tie_break_points[who_lost];
+			if (total_points % 2) { /* x is odd */ 
+				 new_score->who_serves = !(new_score->who_serves);
+			}
 		}else{
 			if(new_score->tie_break_points[who_won] + 1 - new_score->tie_break_points[who_lost] >=2){
 				//printf("End of tie break; new game. who_won had %d, who_lost had %d \n", new_score->tie_break_points[who_won], new_score->tie_break_points[who_lost]);
 				new_game(new_score, who_won);				
 			}else{
 				//printf("Continue, who_won had %d\n", new_score->tie_break_points[who_won]);
-				new_score->tie_break_points[who_won]++;				
+				new_score->tie_break_points[who_won]++;		
+				int total_points =new_score->tie_break_points[who_won] + new_score->tie_break_points[who_lost];
+				if (total_points % 2) { /* x is odd */ 
+				 	new_score->who_serves = !(new_score->who_serves);
+				}		
 			}
 		}
     }else{
@@ -117,6 +125,5 @@ Score* calculate_new_score(Score* current_score, int who_won){
     }  
 
     // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** calculate_new_score *** returning the new score address: %p\n", (void*)new_score);
-    return new_score;
 }
 

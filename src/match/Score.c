@@ -1,5 +1,6 @@
 #include "Const.h"
 #include "Score.h"
+#include "Time.h"
 
 void copy_score_helper(Score* destination_score, Score* source_score){
 
@@ -18,4 +19,5 @@ void copy_score_helper(Score* destination_score, Score* source_score){
     destination_score->points[you] =source_score->points[you];
 	destination_score->tie_break_points[opp] =source_score->tie_break_points[opp];
     destination_score->tie_break_points[you] =source_score->tie_break_points[you];
+    destination_score->time = time(NULL);
 }

@@ -1,2 +1,2 @@
 #include "Score.h"
-Score* calculate_new_score(Score* , int );
+void calculate_new_score(Score* , int, Score*);

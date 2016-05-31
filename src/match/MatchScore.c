@@ -30,6 +30,7 @@ void init_match_schore(int who_starts_serving, int best_of_sets){
     match_score.scores[current_score_idx].tie_break_points[opp]=0;
     match_score.scores[current_score_idx].tie_break_points[you]=0;
     match_score.scores[current_score_idx].best_of_sets=best_of_sets;
+    match_score.scores[current_score_idx].time = time(NULL);
 }
 
 bool is_match_over(){
@@ -38,28 +39,19 @@ bool is_match_over(){
 
 void oponentPoint(){  
     if (!is_match_over())
-    {
-        Score* new_score = calculate_new_score(&match_score.scores[current_score_idx], opp);    
+    {        
+        calculate_new_score(&match_score.scores[current_score_idx], 
+            opp, &match_score.scores[current_score_idx + 1]);    
         current_score_idx++;
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "*** oponentPoint *** #scores: %d\n", current_score_idx);
-        //match_score.scores[current_score_idx]= new_score;
-
-        copy_score_helper(&match_score.scores[current_score_idx], new_score);
     }      
 }
 
 void yourPoint() {
     if (!is_match_over())
     {
-        //printf("your point start \n");
-        Score* new_score = calculate_new_score(&match_score.scores[current_score_idx], you);
-        //printf("your point got new score \n");
+        calculate_new_score(&match_score.scores[current_score_idx], you, 
+            &match_score.scores[current_score_idx + 1]);
         current_score_idx++;
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "*** yourPoint *** #scores: %d\n", current_score_idx);
-        //match_score.scores[current_score_idx]= new_score;
-
-        copy_score_helper(&match_score.scores[current_score_idx], new_score);
-        //printf("your point end \n");
     } 
 }
 
