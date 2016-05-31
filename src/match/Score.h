@@ -1,8 +1,7 @@
+#pragma once
+
 #include <stdbool.h>
 #include "Time.h"
-
-#ifndef SCORE_H
-#define SCORE_H
 
 typedef char* Point;
 
@@ -21,5 +20,3 @@ typedef struct
 } Score;
 
 void score_copy_to_from(Score* , Score* );
-
-#endif

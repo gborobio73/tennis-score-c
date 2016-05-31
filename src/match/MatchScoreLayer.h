@@ -1,8 +1,7 @@
+#pragma once
+
 #include <pebble.h>
 #include "Score.h"
-
-#ifndef MATCHSCORELAYER_H
-#define MATCHSCORELAYER_H
 
 typedef struct 
 {
@@ -19,5 +18,3 @@ void match_score_layer_destroy();
 MatchScoreLayer match_score_layer_get(); 
 
 void match_score_layer_draw_score(Score* );
-
-#endif
