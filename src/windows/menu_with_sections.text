@@ -1,0 +1,184 @@
+//menu with sections
+
+#include <pebble.h>
+
+#include "windows/number_of_sets_window.h"
+#include "windows/who_serves_window.h"
+#include "windows/match_window.h"
+#include "match/MatchConfiguration.h"
+
+#include "windows/dialog_choice_window.h"
+
+#define NUM_MENU_SECTIONS 2
+
+#define BEST_OF_3_SETS "    3 sets"
+#define BEST_OF_5_SETS "    5 sets"
+
+#define OPP_SERVES "    Opponent serves"
+#define YOU_SERVE "    You serve"
+
+static Window *s_main_window;
+static MenuLayer *s_menu_layer;
+
+static uint16_t menu_get_num_sections_callback(MenuLayer *menu_layer, void *data) {
+  return NUM_MENU_SECTIONS;
+}
+
+static int16_t get_header_height_callback(MenuLayer *menu_layer, uint16_t section_index, void *data) {
+    return MENU_CELL_BASIC_HEADER_HEIGHT;
+}
+
+static void draw_header_callback(GContext* ctx, const Layer *cell_layer, uint16_t section_index, void *data) {
+    // Determine which section we're working with
+    switch (section_index) {
+      case 0:
+          // Draw title text in the section header
+          menu_cell_basic_header_draw(ctx, cell_layer, "Settings");
+        break;
+      case 1:
+          // Draw title text in the section header
+          menu_cell_basic_header_draw(ctx, cell_layer, "Match");
+        break;
+    }
+}
+
+static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context) {
+  switch (section_index) {
+    case 0:
+      return 2;
+    case 1:
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_index, void *context) {
+    switch (cell_index->section) {
+        case 0:
+            switch(cell_index->row) {
+              case 0:
+                  if (match_config_is_best_of_3_sets())
+                  {
+                      menu_cell_basic_draw(ctx, cell_layer, "Best of", BEST_OF_3_SETS, NULL);
+                    // graphics_context_set_text_color(ctx, GColorYellow);
+                    // graphics_draw_text(ctx, "Best offff", 
+                    //   fonts_get_system_font(FONT_KEY_GOTHIC_18), 
+                    //     layer_get_bounds(cell_layer), GTextOverflowModeWordWrap, GTextAlignmentLeft, NULL);
+                  }else{
+                      menu_cell_basic_draw(ctx, cell_layer, "Best of", BEST_OF_5_SETS, NULL);
+                  }        
+                  break;
+              case 1:
+                  if (match_config_does_opponent_serve())
+                  {
+                      menu_cell_basic_draw(ctx, cell_layer, "Who serves", OPP_SERVES, NULL);
+                  }else{
+                      menu_cell_basic_draw(ctx, cell_layer, "Who serves", YOU_SERVE, NULL);
+                  }            
+                  break;
+              default:
+                break;
+            }
+            break;
+        case 1:
+            switch(cell_index->row) {
+                case 0:
+                  menu_cell_basic_draw(ctx, cell_layer, "Start match", NULL, NULL);
+                  break;
+            }
+            break;
+    }
+}
+
+static int16_t get_cell_height_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
+  return PBL_IF_ROUND_ELSE(
+    menu_layer_is_index_selected(menu_layer, cell_index) ?
+      MENU_CELL_ROUND_FOCUSED_SHORT_CELL_HEIGHT : MENU_CELL_ROUND_UNFOCUSED_TALL_CELL_HEIGHT,
+      44);
+}
+
+static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
+
+    switch (cell_index ->section){
+        case 0:
+            switch(cell_index->row) {
+                case 0:
+                    //number_of_sets_window_push();
+                    if (match_config_is_best_of_3_sets())
+                    {
+                        match_config_set_best_of_5_sets();            
+                    }else{
+                        match_config_set_best_of_3_sets();
+                    }  
+                    layer_mark_dirty(menu_layer_get_layer(menu_layer))  ;
+                    break;
+                case 1:
+                    //dialog_choice_window_push();
+                    if (match_config_does_opponent_serve())
+                    {
+                        match_config_set_you_serve();            
+                    }else{
+                        match_config_set_opponent_serves();
+                    }  
+                    layer_mark_dirty(menu_layer_get_layer(menu_layer))  ;
+                    break;
+                  break;
+            }
+            break;
+        case 1:
+            switch(cell_index->row) {
+                case 0:  
+                    match_window_push();                 
+                    break;
+            }
+            
+            break;
+    }
+  
+}
+
+static void window_load(Window *window) {
+    Layer *window_layer = window_get_root_layer(window);
+    GRect bounds = layer_get_bounds(window_layer);
+
+    s_menu_layer = menu_layer_create(bounds);
+    menu_layer_set_click_config_onto_window(s_menu_layer, window);
+  #if defined(PBL_COLOR)
+    menu_layer_set_normal_colors(s_menu_layer, GColorMidnightGreen, GColorYellow);
+    menu_layer_set_highlight_colors(s_menu_layer, GColorBlack, GColorYellow);
+  #endif
+    menu_layer_set_callbacks(s_menu_layer, NULL, (MenuLayerCallbacks) {
+        .get_header_height = PBL_IF_RECT_ELSE(get_header_height_callback, NULL),
+        .draw_header = PBL_IF_RECT_ELSE(draw_header_callback, NULL),
+        .get_num_sections = menu_get_num_sections_callback,
+        .get_num_rows = get_num_rows_callback,
+        .draw_row = draw_row_callback,
+        .get_cell_height = get_cell_height_callback,
+        .select_click = select_callback,
+    });
+    layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
+}
+
+static void window_unload(Window *window) {
+    menu_layer_destroy(s_menu_layer);
+}
+
+static void init() {
+    s_main_window = window_create();
+    window_set_window_handlers(s_main_window, (WindowHandlers) {
+        .load = window_load,
+        .unload = window_unload,
+    });
+    window_stack_push(s_main_window, true);
+}
+
+static void deinit() {
+    window_destroy(s_main_window);
+}
+
+int main() {
+    init();
+    app_event_loop();
+    deinit();
+}
