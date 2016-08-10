@@ -4,7 +4,7 @@
 
 #define DIALOG_CHOICE_WINDOW_MESSAGE "End match?"
 
-typedef void (*Callback)(int, Window*);
+typedef void (*Callback)(int);
 typedef struct ChoiceDialogWindowCallbacks {
     Callback callback;
 } ChoiceDialogWindowCallbacks;

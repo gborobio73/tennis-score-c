@@ -14,14 +14,16 @@ static Window *s_match_window;
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     //window_stack_pop(s_match_window);
-    callback.callback(0, s_dialog_window);
+    window_stack_pop(false);
+    callback.callback(0);
     //window_stack_remove(s_dialog_window, false);
     //window_stack_remove(s_match_window, false);
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
     //APP_LOG(APP_LOG_LEVEL_DEBUG, "*** dialog_choice_window down_click_handler *** poping current window"); 
-    callback.callback(1, s_dialog_window);
+    window_stack_pop(false);
+    callback.callback(1);
     //window_stack_remove(s_dialog_window, false);
 }
 
@@ -35,7 +37,7 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  s_icon_bitmap = gbitmap_create_with_resource(RESOURCE_ID_NUM_SETS);
+  s_icon_bitmap = gbitmap_create_with_resource(RESOURCE_ID_TENNIS_BALL);
 
   const GEdgeInsets icon_insets = {.top = 7, .right = 28, .bottom = 56, .left = 14};
   s_icon_layer = bitmap_layer_create(grect_inset(bounds, icon_insets));
@@ -49,6 +51,7 @@ static void window_load(Window *window) {
   text_layer_set_background_color(s_label_layer, GColorClear);
   text_layer_set_text_alignment(s_label_layer, GTextAlignmentCenter);
   text_layer_set_font(s_label_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+  text_layer_set_text_color(s_label_layer, GColorWhite);
   layer_add_child(window_layer, text_layer_get_layer(s_label_layer));
 
   s_tick_bitmap = gbitmap_create_with_resource(RESOURCE_ID_TICK);
@@ -81,7 +84,7 @@ void dialog_choice_window_push( ChoiceDialogWindowCallbacks cb ) {
 
   if(!s_dialog_window) {
     s_dialog_window = window_create();
-    window_set_background_color(s_dialog_window, PBL_IF_COLOR_ELSE(GColorJaegerGreen, GColorWhite));
+    window_set_background_color(s_dialog_window, PBL_IF_COLOR_ELSE(GColorMidnightGreen, GColorWhite));
     window_set_window_handlers(s_dialog_window, (WindowHandlers) {
         .load = window_load,
         .unload = window_unload,
