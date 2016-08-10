@@ -101,8 +101,8 @@ static void window_load(Window *window) {
     s_menu_layer = menu_layer_create(bounds);
     menu_layer_set_click_config_onto_window(s_menu_layer, window);
   #if defined(PBL_COLOR)
-    menu_layer_set_normal_colors(s_menu_layer, GColorBlack, GColorWhite);
-    menu_layer_set_highlight_colors(s_menu_layer, GColorBrilliantRose, GColorWhite);
+    menu_layer_set_normal_colors(s_menu_layer, GColorMidnightGreen, GColorYellow);
+    menu_layer_set_highlight_colors(s_menu_layer, GColorBlack, GColorYellow);
   #endif
     menu_layer_set_callbacks(s_menu_layer, NULL, (MenuLayerCallbacks) {
         .get_header_height = PBL_IF_RECT_ELSE(get_header_height_callback, NULL),

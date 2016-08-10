@@ -8,10 +8,16 @@ static time_t match_started;
 void draw_time_layer(TextLayer *layer){
   // Improve the layout to be more like a watchface
   //GColorClear
-  text_layer_set_background_color(layer, GColorArmyGreen);
-  text_layer_set_text_color(layer, GColorWhite);
+  text_layer_set_background_color(layer, GColorBlack);
+  text_layer_set_text_color(layer, GColorYellow);
   text_layer_set_text(layer, "00:00");
-  text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM));
+
+  
+  static GFont s_font;
+  s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_SCORE_FONT_24));
+  text_layer_set_font(layer, s_font);
+
+  // text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM));
   text_layer_set_text_alignment(layer, GTextAlignmentCenter);
 }
 
@@ -43,12 +49,13 @@ void time_layer_init(Layer *window_layer){
     GRect bounds = layer_get_bounds(window_layer);
     //144, 168
     s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(0, 0), bounds.size.w * 0.67, 30));
+      GRect(5, bounds.size.h - 35, 72, 30));
     draw_time_layer(s_time_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
 
     s_match_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(bounds.size.h - 30, bounds.size.h - 30), bounds.size.w * 0.67, 30));
+      //GRect(5, PBL_IF_ROUND_ELSE(bounds.size.h - 30, bounds.size.h - 33), 72, 30));
+      GRect(79, bounds.size.h - 35, 60, 30));
     draw_time_layer(s_match_time_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_match_time_layer));
 

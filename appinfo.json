@@ -59,7 +59,23 @@
         "type": "bitmap",
         "name": "NUM_SETS_SMALL",
         "file": "images/num-sets-small.png"
+      },
+      {
+        "type": "font",
+        "name": "SCORE_FONT_34",
+        "file": "fonts/digital-7.ttf"
+      },
+      {
+        "type": "font",
+        "name": "SCORE_FONT_24",
+        "file": "fonts/digital-7.ttf"
+      },
+      {
+        "type": "font",
+        "name": "SCORE_FONT_18",
+        "file": "fonts/digital-7.ttf"
       }
+
     ]
   }
 }

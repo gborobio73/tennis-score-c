@@ -4,12 +4,32 @@
 
 #include "dialog_choice_window.h"
 
-static Window *s_main_window;
+static Window *s_dialog_window;
 static TextLayer *s_label_layer;
 static BitmapLayer *s_icon_layer;
 static ActionBarLayer *s_action_bar_layer;
 
 static GBitmap *s_icon_bitmap, *s_tick_bitmap, *s_cross_bitmap;
+static Window *s_match_window;
+
+static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
+    //window_stack_pop(s_match_window);
+    callback.callback(0, s_dialog_window);
+    //window_stack_remove(s_dialog_window, false);
+    //window_stack_remove(s_match_window, false);
+}
+
+static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+    //APP_LOG(APP_LOG_LEVEL_DEBUG, "*** dialog_choice_window down_click_handler *** poping current window"); 
+    callback.callback(1, s_dialog_window);
+    //window_stack_remove(s_dialog_window, false);
+}
+
+static void click_config_provider(void *context) {
+  window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
+}
+
 
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
@@ -38,9 +58,11 @@ static void window_load(Window *window) {
   action_bar_layer_set_icon(s_action_bar_layer, BUTTON_ID_UP, s_tick_bitmap);
   action_bar_layer_set_icon(s_action_bar_layer, BUTTON_ID_DOWN, s_cross_bitmap);
   action_bar_layer_add_to_window(s_action_bar_layer, window);
+  action_bar_layer_set_click_config_provider(s_action_bar_layer, click_config_provider);
 }
 
 static void window_unload(Window *window) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "*** dialog_choice_window window_unload *** unloading window"); 
   text_layer_destroy(s_label_layer);
   action_bar_layer_destroy(s_action_bar_layer);
   bitmap_layer_destroy(s_icon_layer);
@@ -50,17 +72,20 @@ static void window_unload(Window *window) {
   gbitmap_destroy(s_cross_bitmap);
 
   window_destroy(window);
-  s_main_window = NULL;
+  s_dialog_window = NULL;
 }
 
-void dialog_choice_window_push() {
-  if(!s_main_window) {
-    s_main_window = window_create();
-    window_set_background_color(s_main_window, PBL_IF_COLOR_ELSE(GColorJaegerGreen, GColorWhite));
-    window_set_window_handlers(s_main_window, (WindowHandlers) {
+void dialog_choice_window_push( ChoiceDialogWindowCallbacks cb ) {
+  callback = cb;
+  //s_match_window = match_window;
+
+  if(!s_dialog_window) {
+    s_dialog_window = window_create();
+    window_set_background_color(s_dialog_window, PBL_IF_COLOR_ELSE(GColorJaegerGreen, GColorWhite));
+    window_set_window_handlers(s_dialog_window, (WindowHandlers) {
         .load = window_load,
         .unload = window_unload,
     });
   }
-  window_stack_push(s_main_window, true);
+  window_stack_push(s_dialog_window, true);
 }
