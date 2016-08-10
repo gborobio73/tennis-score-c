@@ -5,7 +5,7 @@ static TextLayer *s_time_layer;
 static TextLayer *s_match_time_layer;
 static time_t match_started;
 
-void draw_time_layer(TextLayer *layer){
+static void draw_time_layer(TextLayer *layer){
   // Improve the layout to be more like a watchface
   //GColorClear
   text_layer_set_background_color(layer, GColorBlack);

@@ -5,7 +5,7 @@
 #include "Score.h"
 #include <pebble.h>
 
-void new_set(Score* new_score, int who_won){
+static void new_set(Score* new_score, int who_won){
 	int who_lost = !who_won;
 
 	new_score->points[opp] =love;
@@ -22,7 +22,7 @@ void new_set(Score* new_score, int who_won){
     }
 }
 
-void new_game (Score* new_score, int who_won){
+static void new_game (Score* new_score, int who_won){
 	int who_lost = !who_won;
 
 	new_score->points[opp] =love;

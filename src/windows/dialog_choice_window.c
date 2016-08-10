@@ -43,7 +43,7 @@ static void window_load(Window *window) {
 
   const GEdgeInsets label_insets = {.top = 112, .right = ACTION_BAR_WIDTH, .left = ACTION_BAR_WIDTH / 2};
   s_label_layer = text_layer_create(grect_inset(bounds, label_insets));
-  text_layer_set_text(s_label_layer, DIALOG_CHOICE_WINDOW_MESSAGE);
+  text_layer_set_text(s_label_layer, "End match?");
   text_layer_set_background_color(s_label_layer, GColorClear);
   text_layer_set_text_alignment(s_label_layer, GTextAlignmentCenter);
   text_layer_set_font(s_label_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
@@ -76,8 +76,7 @@ static void window_unload(Window *window) {
 
 void dialog_choice_window_push( ChoiceDialogWindowCallbacks cb ) {
   callback = cb;
-  //s_match_window = match_window;
-
+  
   if(!s_dialog_window) {
     s_dialog_window = window_create();
     window_set_background_color(s_dialog_window, PBL_IF_COLOR_ELSE(GColorMidnightGreen, GColorWhite));
