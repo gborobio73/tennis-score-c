@@ -13,36 +13,44 @@ static char buffer_tie_break_points_you[3];
 
 MatchScoreLayer match_score_layer;
 
-static void set_text_layer_design(TextLayer* layer){
-	text_layer_set_text_alignment(layer, GTextAlignmentCenter);
-	//text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
-	
-	// Load the custom font
+static void set_text_layer_big_font(TextLayer* layer){
 	static GFont s_font;
 	s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_SCORE_FONT_34));
 	text_layer_set_font(layer, s_font);
+}
 
-	//text_layer_set_background_color(layer, GColorClear);
+static void set_text_layer_colors(TextLayer* layer){
 	text_layer_set_text_color(layer, GColorYellow);
 	text_layer_set_background_color(layer, GColorBlack);
 }
 
-static void set_point_layer_design(TextLayer* layer){
-	set_text_layer_design(layer);
+static void set_text_layer_colors_inverted(TextLayer* layer){
 	text_layer_set_text_color(layer, GColorBlack);
 	text_layer_set_background_color(layer, GColorYellow );
 }
 
+static void set_point_layer_design(TextLayer* layer){
+	text_layer_set_text_alignment(layer, GTextAlignmentCenter);
+	set_text_layer_big_font(layer);
+	set_text_layer_colors_inverted(layer);	
+}
+
 static void set_games_layer_design(TextLayer* layer){
-	set_text_layer_design(layer);
+	text_layer_set_text_alignment(layer, GTextAlignmentCenter);	
+	set_text_layer_big_font(layer);
+	set_text_layer_colors(layer);	
 }
 
 static void set_sets_layer_design(TextLayer* layer){
-	set_text_layer_design(layer);
-}
+	text_layer_set_text_alignment(layer, GTextAlignmentCenter);	
+	set_text_layer_big_font(layer);
+	set_text_layer_colors(layer);	
+}	
 
 static void set_who_serves_layer_design(TextLayer* layer){
-	set_text_layer_design(layer);
+	text_layer_set_text_alignment(layer, GTextAlignmentCenter);	
+	set_text_layer_big_font(layer);
+	set_text_layer_colors(layer);	
 }
 
 void match_score_layer_init(Layer *window_layer){
