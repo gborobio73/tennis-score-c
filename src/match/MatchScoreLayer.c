@@ -11,7 +11,7 @@ static char buffer_sets_you[2];
 static char buffer_tie_break_points_opp[3];
 static char buffer_tie_break_points_you[3];
 
-MatchScoreLayer match_score_layer;
+static MatchScoreLayer match_score_layer;
 
 static void set_text_layer_big_font(TextLayer* layer){
 	static GFont s_font;
@@ -67,7 +67,7 @@ void match_score_layer_init(Layer *window_layer){
 	text_layer_set_text(match_score_layer.s_text_who_serves_layer[you], ".");
 	set_who_serves_layer_design(match_score_layer.s_text_who_serves_layer[you]);
 	//--
-	
+
 	match_score_layer.s_text_points_layer[opp] = text_layer_create(GRect(79, fromTopOppPx, widthPx, heightPx));
 	text_layer_set_text(match_score_layer.s_text_points_layer[opp], ".");
 	set_point_layer_design(match_score_layer.s_text_points_layer[opp]);
@@ -101,10 +101,6 @@ void match_score_layer_init(Layer *window_layer){
   	layer_add_child(window_layer, text_layer_get_layer(match_score_layer.s_text_who_serves_layer[opp]));
   	layer_add_child(window_layer, text_layer_get_layer(match_score_layer.s_text_who_serves_layer[you]));
 }
-
-MatchScoreLayer match_score_layer_get(){
-	return match_score_layer;
-} 
 
 static void draw_who_serves(Score* score){
 	if (score->who_serves == opp)

@@ -13,18 +13,14 @@ static GBitmap *s_icon_bitmap, *s_tick_bitmap, *s_cross_bitmap;
 static Window *s_match_window;
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-    //window_stack_pop(s_match_window);
     window_stack_pop(false);
     callback.callback(0);
-    //window_stack_remove(s_dialog_window, false);
-    //window_stack_remove(s_match_window, false);
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
     //APP_LOG(APP_LOG_LEVEL_DEBUG, "*** dialog_choice_window down_click_handler *** poping current window"); 
     window_stack_pop(false);
     callback.callback(1);
-    //window_stack_remove(s_dialog_window, false);
 }
 
 static void click_config_provider(void *context) {

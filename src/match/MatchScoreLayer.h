@@ -15,6 +15,4 @@ typedef struct
 void match_score_layer_init(Layer* );
 void match_score_layer_destroy();
 
-MatchScoreLayer match_score_layer_get(); 
-
 void match_score_layer_draw_score(Score* );
