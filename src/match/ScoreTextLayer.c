@@ -19,9 +19,7 @@ static char* resolve_text(char* point){
   if(strcmp(point, forty) == 0){
     return "forty";
   }
-  // if(strcmp(point, ad) == 0){
-    return "advantage";
-  // }
+  return "advantage";
 }
 
 
@@ -43,7 +41,7 @@ static void draw_text_score_layer(TextLayer *layer){
 void score_text_layer_update_text(Score* score) {
 
     text[0]='\0';
-    
+
     if (score->is_tie_break)
     {
       strcat(text, "tiebreak");
@@ -88,7 +86,7 @@ void score_text_layer_init(Layer *window_layer){
     //GRect bounds = layer_get_bounds(window_layer);
     //144, 168
     s_score_text_layer = text_layer_create(
-      GRect(5, 5, 136, 30));
+      GRect(5, 8, 136, 27));
     draw_text_score_layer(s_score_text_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_score_text_layer));    
     text = malloc(50* sizeof(char));

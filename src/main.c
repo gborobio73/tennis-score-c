@@ -9,11 +9,11 @@
 
 #define NUM_WINDOWS 3
 
-#define BEST_OF_3_SETS "3 sets"
-#define BEST_OF_5_SETS "5 sets"
+#define BEST_OF_3_SETS "  3 sets"
+#define BEST_OF_5_SETS "  5 sets"
 
-#define OPP_SERVES "Opponent serves"
-#define YOU_SERVE "You serve"
+#define OPP_SERVES "  Opponent serves"
+#define YOU_SERVE "  You serve"
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;

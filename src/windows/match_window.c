@@ -48,10 +48,8 @@ void choice_window_callback(int option_choosed){
   }
 }
 
-static void back_click_handler(ClickRecognizerRef recognizer, void *context) {
-  ChoiceDialogWindowCallbacks callback;
-  callback.callback = choice_window_callback;
-  dialog_choice_window_push(callback);
+static void back_click_handler(ClickRecognizerRef recognizer, void *context) {  
+  dialog_choice_window_push((ChoiceDialogWindowCallbacks) {.callback = choice_window_callback} );
 }
 
 static void click_config_provider(void *context) {
