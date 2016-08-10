@@ -11,6 +11,15 @@ static char buffer_sets_you[2];
 static char buffer_tie_break_points_opp[3];
 static char buffer_tie_break_points_you[3];
 
+typedef struct 
+{
+	TextLayer *s_text_points_layer[2];
+	TextLayer *s_text_games_layer[2];
+	TextLayer *s_text_sets_layer[2];
+	TextLayer *s_text_who_serves_layer[2];
+	
+} MatchScoreLayer;
+
 static MatchScoreLayer match_score_layer;
 
 static void set_text_layer_big_font(TextLayer* layer){
