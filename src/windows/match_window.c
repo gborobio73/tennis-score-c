@@ -47,7 +47,7 @@ void choice_window_callback(int option_choosed){
   //APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_window my_callback *** callback done: option choosed %d", option_choosed);
   if (option_choosed == 0)
   {
-    window_stack_pop(false);
+    window_stack_pop(true);
   }
 }
 
