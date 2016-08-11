@@ -4,6 +4,12 @@
 
 #include "dialog_choice_window.h"
 
+#if defined(PBL_PLATFORM_APLITE)
+  #define BACKGROUD_COLOR GColorMidnightGreen;
+#else
+  #define BACKGROUD_COLOR GColorMidnightGreen;
+#endif
+
 static Window *s_dialog_window;
 static TextLayer *s_label_layer;
 static BitmapLayer *s_icon_layer;
@@ -79,7 +85,7 @@ void dialog_choice_window_push( ChoiceDialogWindowCallbacks cb ) {
   
   if(!s_dialog_window) {
     s_dialog_window = window_create();
-    window_set_background_color(s_dialog_window, PBL_IF_COLOR_ELSE(GColorMidnightGreen, GColorWhite));
+    window_set_background_color(s_dialog_window, PBL_IF_COLOR_ELSE(GColorMidnightGreen, GColorDarkGray));
     window_set_window_handlers(s_dialog_window, (WindowHandlers) {
         .load = window_load,
         .unload = window_unload,

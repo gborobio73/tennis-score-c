@@ -20,6 +20,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_window select_click_handler *** SELECT");
   match_schore_cancel_last_point();
   Score* score = match_schore_get_current_score(); 
   match_score_layer_draw_score(score);
@@ -27,6 +28,7 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_window up_click_handler *** UP");
   match_schore_oponent_point();
   Score* score = match_schore_get_current_score(); 
   match_score_layer_draw_score(score);
@@ -34,6 +36,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_window down_click_handler *** DOWN");
   match_schore_your_point();
   Score* score = match_schore_get_current_score(); 
   match_score_layer_draw_score(score);
@@ -94,7 +97,7 @@ static void window_unload(Window *window) {
 void match_window_push() {
     if(!s_match_window) {    
       s_match_window = window_create();
-      window_set_background_color(s_match_window, GColorMidnightGreen);
+      window_set_background_color(s_match_window, PBL_IF_COLOR_ELSE(GColorMidnightGreen, GColorBlack));
       window_set_click_config_provider(s_match_window, click_config_provider);
       window_set_window_handlers(s_match_window, (WindowHandlers) {
           .load = window_load,

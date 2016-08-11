@@ -2,7 +2,15 @@
 #include <stdbool.h>
 #include "Score.h"
 
-#define SCORES_INITIAL_SIZE 500;
+#if defined(PBL_PLATFORM_APLITE)
+  #define SCORES_INITIAL_SIZE 100;
+#elif defined(PBL_PLATFORM_CHALK)
+	#define SCORES_INITIAL_SIZE 100;
+#else
+  #define SCORES_INITIAL_SIZE 500;
+#endif
+
+
 
 typedef struct
 {

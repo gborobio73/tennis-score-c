@@ -124,7 +124,7 @@ static void draw_who_serves(Score* score){
 	}
 }
 static void draw_points_games_and_sets(Score* score){
-	//APP_LOG(APP_LOG_LEVEL_DEBUG, "score->games[opp]: %s", buffer_games_opp);
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "score->games[opp]: %s", buffer_games_opp);
 	if (score->is_tie_break == true)
 	{
 		snprintf(buffer_tie_break_points_opp, 3, "%d", score->tie_break_points[opp]);	
