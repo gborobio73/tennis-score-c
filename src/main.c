@@ -1,13 +1,10 @@
 #include <pebble.h>
 
-#include "windows/number_of_sets_window.h"
-#include "windows/who_serves_window.h"
 #include "windows/match_window.h"
 #include "match/MatchConfiguration.h"
-
 #include "windows/dialog_choice_window.h"
 
-#define NUM_WINDOWS 3
+#define NUM_OPTIONS 3
 
 #define BEST_OF_3_SETS "  3 sets"
 #define BEST_OF_5_SETS "  5 sets"
@@ -27,7 +24,7 @@ static void draw_header_callback(GContext* ctx, const Layer *cell_layer, uint16_
 }
 
 static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context) {
-  return NUM_WINDOWS;
+  return NUM_OPTIONS;
 }
 
 static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_index, void *context) {

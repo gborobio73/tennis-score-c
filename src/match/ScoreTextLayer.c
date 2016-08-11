@@ -2,6 +2,7 @@
 #include "Score.h"
 #include "Const.h"
 #include "ScoreTextLayer.h"
+#include "../Common/Texts.h"
 
 static TextLayer *s_score_text_layer;
 static char* text;
@@ -18,24 +19,22 @@ static char* text;
 
 static char* resolve_text(char* point){
   if(strcmp(point, love) == 0){
-    return "love";
+    return LOVE_SCORE;
   }
   if(strcmp(point, fifteen) == 0){
-    return "fifteen";
+    return FIFTEEN_SCORE;
   }
   if(strcmp(point, thirty) == 0){
-    return "thirty";
+    return THIRTY_SCORE;
   }
   if(strcmp(point, forty) == 0){
-    return "forty";
+    return FORTY_SCORE;
   }
-  return "advantage";
+  return AD_SCORE;
 }
 
 
 static void draw_text_score_layer(TextLayer *layer){
-  // Improve the layout to be more like a watchface
-  //GColorClear
   text_layer_set_background_color(layer, GColorClear);
   text_layer_set_text_color(layer, GColorWhite);
   text_layer_set_text(layer, STATIC_TEXT);
@@ -44,16 +43,13 @@ static void draw_text_score_layer(TextLayer *layer){
   s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_SCORE_FONT_15));
   text_layer_set_font(layer, s_font);
 
-  // text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM));
   text_layer_set_text_alignment(layer, GTextAlignmentCenter);
 }
 
 void score_text_layer_update_text(Score* score) {
-
     text[0]='\0';
 
-    if (score->is_tie_break)
-    {
+    if (score->is_tie_break){
       strcat(text, "tiebreak");
     }
     else if (strcmp(score->points[you], ad)==0)
@@ -80,7 +76,8 @@ void score_text_layer_update_text(Score* score) {
           strcat(text, " all");
       }      
     }
-    else{
+    else
+    {
       char* a = resolve_text(score->points[score->who_serves]);
       char* b = resolve_text(score->points[!score->who_serves]);
       strcat(text, a);

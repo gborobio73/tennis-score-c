@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include "TimeLayer.h"
 
-typedef char* Point;
-
 typedef struct
 {
     int who_serves;
@@ -12,7 +10,7 @@ typedef struct
     bool match_is_over;
     int sets [2];
     int games [2];
-    Point points [2];
+    char* points [2];
     int tie_break_points [2];
     int best_of_sets;
     time_t time;

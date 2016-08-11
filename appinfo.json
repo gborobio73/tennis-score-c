@@ -17,21 +17,6 @@
     "media": [
       {
         "type": "bitmap",
-        "name": "TICK_BLACK",
-        "file": "images/tick_black.png"
-      },
-      {
-        "type": "bitmap",
-        "name": "TICK_WHITE",
-        "file": "images/tick_white.png"
-      },
-      {
-        "type": "bitmap",
-        "name": "CONFIRM",
-        "file": "images/confirm.png"
-      },
-      {
-        "type": "bitmap",
         "name": "CROSS",
         "file": "images/cross.png"
       },
@@ -39,16 +24,6 @@
         "type": "bitmap",
         "name": "TICK",
         "file": "images/tick.png"
-      },
-      {
-        "type": "bitmap",
-        "name": "WARNING",
-        "file": "images/warning.png"
-      },
-      {
-        "type": "bitmap",
-        "name": "CONFIG_REQUIRED",
-        "file": "images/config-required.png"
       },
       {
         "type": "bitmap",
