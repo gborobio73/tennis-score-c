@@ -67,10 +67,14 @@
       },
       {
         "type": "font",
+        "name": "SCORE_FONT_20",
+        "file": "fonts/digital-7.ttf"
+      },
+      {
+        "type": "font",
         "name": "SCORE_FONT_18",
         "file": "fonts/digital-7.ttf"
       }
-
     ]
   }
 }

@@ -59,45 +59,47 @@ static void set_sets_layer_design(TextLayer* layer){
 static void set_who_serves_layer_design(TextLayer* layer){
 	text_layer_set_text_alignment(layer, GTextAlignmentCenter);	
 	set_text_layer_big_font(layer);
-	set_text_layer_colors(layer);	
+	//set_text_layer_colors(layer);	
+	text_layer_set_text_color(layer, GColorYellow);
+	text_layer_set_background_color(layer, GColorClear);
 }
 
 void match_score_layer_init(Layer *window_layer){
-	int fromTopOppPx = 39;
-	int fromTopYouPx = 86;
+	int fromTopOppPx = 35;//37; //39;
+	int fromTopYouPx = 84;//86;
 	int heightPx = 45;
-	int widthPx = 35;
+	int widthPx = 37;// 35;
 	//Who serves
-	match_score_layer.s_text_who_serves_layer[opp] = text_layer_create(GRect(116, fromTopOppPx, 24, heightPx));
+	match_score_layer.s_text_who_serves_layer[opp] = text_layer_create(GRect(128, fromTopOppPx, 14, heightPx));//116 - 24
 	text_layer_set_text(match_score_layer.s_text_who_serves_layer[opp], ".");
 	set_who_serves_layer_design(match_score_layer.s_text_who_serves_layer[opp]);
 	
-	match_score_layer.s_text_who_serves_layer[you] = text_layer_create(GRect(116, fromTopYouPx, 24, heightPx));
+	match_score_layer.s_text_who_serves_layer[you] = text_layer_create(GRect(128, fromTopYouPx, 14, heightPx));//116
 	text_layer_set_text(match_score_layer.s_text_who_serves_layer[you], ".");
 	set_who_serves_layer_design(match_score_layer.s_text_who_serves_layer[you]);
 	//--
 
-	match_score_layer.s_text_points_layer[opp] = text_layer_create(GRect(79, fromTopOppPx, widthPx, heightPx));
+	match_score_layer.s_text_points_layer[opp] = text_layer_create(GRect(89, fromTopOppPx, widthPx, heightPx));
 	text_layer_set_text(match_score_layer.s_text_points_layer[opp], ".");
 	set_point_layer_design(match_score_layer.s_text_points_layer[opp]);
 	
-	match_score_layer.s_text_points_layer[you] = text_layer_create(GRect(79, fromTopYouPx, widthPx, heightPx));
+	match_score_layer.s_text_points_layer[you] = text_layer_create(GRect(89, fromTopYouPx, widthPx, heightPx));//79
 	text_layer_set_text(match_score_layer.s_text_points_layer[you], ".");
 	set_point_layer_design(match_score_layer.s_text_points_layer[you]);
 
-	match_score_layer.s_text_games_layer[opp] = text_layer_create(GRect(42, fromTopOppPx, widthPx, heightPx));
+	match_score_layer.s_text_games_layer[opp] = text_layer_create(GRect(48, fromTopOppPx, widthPx, heightPx));//42
 	text_layer_set_text(match_score_layer.s_text_games_layer[opp], ".");
 	set_games_layer_design(match_score_layer.s_text_games_layer[opp]);
 	
-	match_score_layer.s_text_games_layer[you] = text_layer_create(GRect(42, fromTopYouPx, widthPx, heightPx));
+	match_score_layer.s_text_games_layer[you] = text_layer_create(GRect(48, fromTopYouPx, widthPx, heightPx));//42
 	text_layer_set_text(match_score_layer.s_text_games_layer[you], ".");
 	set_games_layer_design(match_score_layer.s_text_games_layer[you]);
 
-	match_score_layer.s_text_sets_layer[opp] = text_layer_create(GRect(5, fromTopOppPx, widthPx, heightPx));
+	match_score_layer.s_text_sets_layer[opp] = text_layer_create(GRect(7, fromTopOppPx, widthPx, heightPx));//5
 	text_layer_set_text(match_score_layer.s_text_sets_layer[opp], ".");
 	set_sets_layer_design(match_score_layer.s_text_sets_layer[opp]);
 	
-	match_score_layer.s_text_sets_layer[you] = text_layer_create(GRect(5, fromTopYouPx, widthPx, heightPx));
+	match_score_layer.s_text_sets_layer[you] = text_layer_create(GRect(7, fromTopYouPx, widthPx, heightPx));//5
 	text_layer_set_text(match_score_layer.s_text_sets_layer[you], ".");
 	set_sets_layer_design(match_score_layer.s_text_sets_layer[you]);
 	
@@ -114,11 +116,11 @@ void match_score_layer_init(Layer *window_layer){
 static void draw_who_serves(Score* score){
 	if (score->who_serves == opp)
 	{
-		text_layer_set_text(match_score_layer.s_text_who_serves_layer[opp], "X");
+		text_layer_set_text(match_score_layer.s_text_who_serves_layer[opp], "*");
 		text_layer_set_text(match_score_layer.s_text_who_serves_layer[you], "");
 	}else{
 		text_layer_set_text(match_score_layer.s_text_who_serves_layer[opp], "");
-		text_layer_set_text(match_score_layer.s_text_who_serves_layer[you], "X");
+		text_layer_set_text(match_score_layer.s_text_who_serves_layer[you], "*");
 	}
 }
 static void draw_points_games_and_sets(Score* score){
