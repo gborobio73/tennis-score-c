@@ -1,7 +1,6 @@
 #pragma once
 
 #include <pebble.h>
-#include "score.h"
 
 void score_text_layer_update_text(Score* );
 void score_text_layer_init(Layer* );

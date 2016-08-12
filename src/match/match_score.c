@@ -6,7 +6,6 @@
 #include "const.h"
 #include "score_calculator.h"
 #include "score.h"
-#include "time_layer.h"
 #include <pebble.h>
 
 MatchScore match_score;

@@ -1,8 +1,9 @@
 #include <pebble.h>
-#include "const.h"
-#include "match_score_layer.h"
-#include "score.h"
+#include "../match/const.h"
+#include "../match/score.h"
 #include "../common/texts.h"
+#include "match_score_layer.h"
+
 
 #if defined(PBL_PLATFORM_CHALK)
 	#define SETS_X 27

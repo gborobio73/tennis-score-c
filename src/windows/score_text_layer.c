@@ -1,8 +1,8 @@
 #include <pebble.h>
-#include "score.h"
-#include "const.h"
-#include "score_text_layer.h"
+#include "../match/score.h"
+#include "../match/const.h"
 #include "../common/texts.h"
+#include "score_text_layer.h"
 
 static TextLayer *s_score_text_layer;
 static char* text;
