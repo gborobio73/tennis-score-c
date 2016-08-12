@@ -21,4 +21,4 @@
 #define SPACE_SCORE " "
 #define STATIC_SCORE_TEXT "Sets  Games Points"
 #define MATCHOVER_SCORE "Match over"
-#define QUESTION_END_MATCH "End match?"
+#define QUESTION_END_MATCH "Quit match?"

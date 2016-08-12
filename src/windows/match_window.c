@@ -37,7 +37,7 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 void selected_user_option(int option_choosed){
-    //APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_window my_callback *** callback done: option choosed %d", option_choosed);
+    //APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_window selected_user_option *** callback done: option choosed %d", option_choosed);
     if (option_choosed == OK)
     {
       window_stack_pop(true);
@@ -51,8 +51,7 @@ static void back_click_handler(ClickRecognizerRef recognizer, void *context) {
     }else
     {
         dialog_choice_window_push((ChoiceDialogWindowCallbacks) {.selected_user_option_callback = selected_user_option} );
-    }
-  
+    } 
 }
 
 static void click_config_provider(void *context) {

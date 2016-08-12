@@ -35,7 +35,7 @@ static char* resolve_text(char* point){
 static void draw_text_score_layer(TextLayer *layer){
     text_layer_set_background_color(layer, GColorClear);
     text_layer_set_text_color(layer, GColorWhite);
-    text_layer_set_text(layer, STATIC_TEXT);
+    text_layer_set_text(layer, STATIC_SCORE_TEXT);
     
     static GFont s_font;
     s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_SCORE_FONT_15));
