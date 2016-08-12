@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "const.h"
+#include "../common/const.h"
 #include "score.h"
 #include "match_configuration.h"
 #include <pebble.h>

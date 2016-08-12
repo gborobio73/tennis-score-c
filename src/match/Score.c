@@ -1,4 +1,4 @@
-#include "const.h"
+#include "../common/const.h"
 #include "score.h"
 
 void score_copy_to_from(Score* destination_score, Score* source_score){

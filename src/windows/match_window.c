@@ -2,7 +2,7 @@
 #include "dialog_choice_window.h"
 #include "../match/match_configuration.h"
 #include "../match/match_score.h"
-#include "../match/const.h"
+#include "../common/const.h"
 #include "../match/score.h"
 #include "match_score_layer.h"
 #include "time_layer.h"

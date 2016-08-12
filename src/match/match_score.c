@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "match_score.h"
-#include "const.h"
+#include "../common/const.h"
 #include "score_calculator.h"
 #include "score.h"
 #include <pebble.h>

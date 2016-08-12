@@ -1,5 +1,5 @@
 #include <pebble.h>
-#include "../match/const.h"
+#include "../common/const.h"
 #include "../match/score.h"
 #include "../common/texts.h"
 #include "match_score_layer.h"

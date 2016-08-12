@@ -1,6 +1,6 @@
 #include "dialog_choice_window.h"
 #include "../common/texts.h"
-#include "../match/const.h"
+#include "../common/const.h"
 
 #if defined(PBL_PLATFORM_APLITE)
   #define BACKGROUD_COLOR GColorMidnightGreen;

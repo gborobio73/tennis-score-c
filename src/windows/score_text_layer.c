@@ -1,6 +1,6 @@
 #include <pebble.h>
 #include "../match/score.h"
-#include "../match/const.h"
+#include "../common/const.h"
 #include "../common/texts.h"
 #include "score_text_layer.h"
 
