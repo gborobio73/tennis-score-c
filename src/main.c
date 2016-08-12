@@ -1,8 +1,8 @@
 #include <pebble.h>
 
 #include "windows/match_window.h"
-#include "match/match_configuration.h"
 #include "windows/dialog_choice_window.h"
+#include "match/match_configuration.h"
 #include "common/texts.h"
 
 #define NUM_MENU_ITEMS 3

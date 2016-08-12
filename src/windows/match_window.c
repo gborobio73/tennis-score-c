@@ -1,13 +1,12 @@
 #include "match_window.h"
 #include "dialog_choice_window.h"
+#include "match_score_layer.h"
+#include "time_layer.h"
+#include "score_text_layer.h"
 #include "../match/match_configuration.h"
 #include "../match/match_score.h"
 #include "../common/const.h"
 #include "../match/score.h"
-#include "match_score_layer.h"
-#include "time_layer.h"
-#include "score_text_layer.h"
-
 
 static Window *s_match_window;
 
