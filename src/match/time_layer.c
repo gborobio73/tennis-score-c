@@ -1,5 +1,5 @@
 #include <pebble.h>
-//#include <TimeLayer.h>
+
 #if defined(PBL_PLATFORM_CHALK)
     #define CURRENT_TIME_X 27
     #define MATCH_TIME_X 89    
@@ -17,17 +17,14 @@ static uint32_t resolve_font(){
 }
 
 static void draw_time_layer(TextLayer *layer){
-    // Improve the layout to be more like a watchface
-    //GColorClear
-    text_layer_set_background_color(layer, GColorClear); //GColorBlack
-    text_layer_set_text_color(layer, GColorWhite); //GColorYellow
+    text_layer_set_background_color(layer, GColorClear); 
+    text_layer_set_text_color(layer, GColorWhite); 
     text_layer_set_text(layer, "00:00");
 
     static GFont s_font;
     s_font = fonts_load_custom_font(resource_get_handle(resolve_font()));
     text_layer_set_font(layer, s_font);
 
-    // text_layer_set_font(layer, fonts_get_system_font(FONT_KEY_LECO_26_BOLD_NUMBERS_AM_PM));
     text_layer_set_text_alignment(layer, GTextAlignmentCenter);
 }
 
@@ -37,26 +34,25 @@ static int resolve_Y(Layer *window_layer){
 }
 
 void time_layer_update_time() {
-    // Get a tm structure
+    
     time_t temp = time(NULL);
     struct tm *tick_time = localtime(&temp);
 
-    // Write the current hours and minutes into a buffer
     static char s_buffer[8];
     strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
 
-    // Display this time on the TextLayer
     text_layer_set_text(s_time_layer, s_buffer);
 
     time_t match_now = time(NULL);
     int difference_in_seconds = match_now - match_started ;
-    int minutes = ((difference_in_seconds ) / 60) % 60 ;//(totalSeconds / 60) % 60
+    int minutes = ((difference_in_seconds ) / 60) % 60;
     int hours = difference_in_seconds / 3600; 
 
     static char match_time_buffer [6];
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", hours, minutes);
     APP_LOG(APP_LOG_LEVEL_DEBUG, match_time_buffer);
     text_layer_set_text(s_match_time_layer, match_time_buffer);
+    layer_mark_dirty(text_layer_get_layer(s_match_time_layer));
 }
 
 void time_layer_init(Layer *window_layer){

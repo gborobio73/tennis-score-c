@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Const.h"
-#include "Score.h"
+#include "const.h"
+#include "score.h"
+#include "match_configuration.h"
 #include <pebble.h>
 
 static void new_set(Score* new_score, int who_won){
-	int who_lost = !who_won;
-
 	new_score->points[opp] =love;
     new_score->points[you] =love;
 	new_score->tie_break_points[opp] =0;
@@ -16,10 +15,14 @@ static void new_set(Score* new_score, int who_won){
 	new_score->games[opp] =0;
     new_score->games[you] =0;
     new_score->sets[who_won] ++;
-    if (new_score->sets[who_won] + new_score->sets[who_lost] == new_score->best_of_sets)
+    
+    if ((match_config_is_best_of_3_sets() && new_score->sets[who_won] ==2 )
+    	||
+    	new_score->sets[who_won] ==3 ) /* best of 5*/
     {
     	new_score->match_is_over = true;
     }
+   
 }
 
 static void new_game (Score* new_score, int who_won){

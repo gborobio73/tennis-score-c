@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdbool.h>
-#include "TimeLayer.h"
+#include <pebble.h>
 
 typedef struct
 {

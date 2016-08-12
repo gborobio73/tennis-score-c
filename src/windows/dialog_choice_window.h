@@ -5,7 +5,7 @@
 typedef void (*Callback)(int);
 
 typedef struct ChoiceDialogWindowCallbacks {
-    Callback callback;
+    Callback selected_user_option_callback;
 } ChoiceDialogWindowCallbacks;
 
 ChoiceDialogWindowCallbacks callback;

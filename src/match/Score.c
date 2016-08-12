@@ -1,9 +1,8 @@
-#include "Const.h"
-#include "Score.h"
-#include "TimeLayer.h"
+#include "const.h"
+#include "score.h"
+#include "time_layer.h"
 
 void score_copy_to_from(Score* destination_score, Score* source_score){
-
 	destination_score->is_tie_break = source_score->is_tie_break;
     destination_score->match_is_over = source_score->match_is_over;
     destination_score->who_serves = source_score->who_serves;

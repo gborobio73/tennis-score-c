@@ -1,8 +1,8 @@
 #include <pebble.h>
-#include "Const.h"
-#include "MatchScoreLayer.h"
-#include "Score.h"
-#include "../Common/Texts.h"
+#include "const.h"
+#include "match_score_layer.h"
+#include "score.h"
+#include "../common/texts.h"
 
 #if defined(PBL_PLATFORM_CHALK)
 	#define SETS_X 27
@@ -92,6 +92,8 @@ static void draw_who_serves(Score* score){
 		text_layer_set_text(match_score_layer.s_text_who_serves_layer[opp], EMPTY_TEXT);
 		text_layer_set_text(match_score_layer.s_text_who_serves_layer[you], WHO_SERVES_MARK);
 	}
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_who_serves_layer[opp]));
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_who_serves_layer[you]));
 }
 
 static void draw_points(Score* score){
@@ -106,6 +108,8 @@ static void draw_points(Score* score){
 		text_layer_set_text(match_score_layer.s_text_points_layer[opp], score->points[opp]);
 		text_layer_set_text(match_score_layer.s_text_points_layer[you], score->points[you]);		
 	}	
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_points_layer[opp]));
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_points_layer[you]));
 }
 
 static void draw_games(Score* score){
@@ -114,6 +118,9 @@ static void draw_games(Score* score){
 
 	snprintf(buffer_games_you, 2, "%d", score->games[you]);
 	text_layer_set_text(match_score_layer.s_text_games_layer[you], buffer_games_you);
+
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_games_layer[opp]));
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_games_layer[you]));
 }
 
 static void draw_sets(Score* score){
@@ -122,6 +129,9 @@ static void draw_sets(Score* score){
 
 	snprintf(buffer_sets_you, 2, "%d", score->sets[you]);	
 	text_layer_set_text(match_score_layer.s_text_sets_layer[you], buffer_sets_you);	
+
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_sets_layer[opp]));
+	layer_mark_dirty(text_layer_get_layer(match_score_layer.s_text_sets_layer[you]));
 }
 
 void match_score_layer_init(Layer *window_layer){

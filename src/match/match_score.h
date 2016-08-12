@@ -1,6 +1,6 @@
 #pragma once
 #include <stdbool.h>
-#include "Score.h"
+#include "score.h"
 
 #if defined(PBL_PLATFORM_APLITE)
   #define SCORES_INITIAL_SIZE 100;
@@ -9,8 +9,6 @@
 #else
   #define SCORES_INITIAL_SIZE 500;
 #endif
-
-
 
 typedef struct
 {

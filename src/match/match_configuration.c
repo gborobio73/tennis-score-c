@@ -1,4 +1,4 @@
-#include "Const.h"
+#include "const.h"
 #include <stdbool.h>
 
 static int best_of_sets =3;

@@ -1,16 +1,11 @@
 #include <pebble.h>
 
 #include "windows/match_window.h"
-#include "match/MatchConfiguration.h"
+#include "match/match_configuration.h"
 #include "windows/dialog_choice_window.h"
+#include "common/texts.h"
 
-#define NUM_OPTIONS 3
-
-#define BEST_OF_3_SETS "  3 sets"
-#define BEST_OF_5_SETS "  5 sets"
-
-#define OPP_SERVES "  Opponent serves"
-#define YOU_SERVE "  You serve"
+#define NUM_MENU_ITEMS 3
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;
@@ -20,11 +15,11 @@ static int16_t get_header_height_callback(MenuLayer *menu_layer, uint16_t sectio
 }
 
 static void draw_header_callback(GContext* ctx, const Layer *cell_layer, uint16_t section_index, void *data) {
-    menu_cell_basic_header_draw(ctx, cell_layer, "Menu");
+    menu_cell_basic_header_draw(ctx, cell_layer, MENU);
 }
 
 static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context) {
-  return NUM_OPTIONS;
+  return NUM_MENU_ITEMS;
 }
 
 static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex *cell_index, void *context) {
@@ -32,21 +27,21 @@ static void draw_row_callback(GContext *ctx, const Layer *cell_layer, MenuIndex 
       case 0:
           if (match_config_is_best_of_3_sets())
           {
-              menu_cell_basic_draw(ctx, cell_layer, "Best of", BEST_OF_3_SETS, NULL);
+              menu_cell_basic_draw(ctx, cell_layer, BEST_OF, BEST_OF_3_SETS, NULL);
           }else{
-              menu_cell_basic_draw(ctx, cell_layer, "Best of", BEST_OF_5_SETS, NULL);
+              menu_cell_basic_draw(ctx, cell_layer, BEST_OF, BEST_OF_5_SETS, NULL);
           }        
           break;
       case 1:
           if (match_config_does_opponent_serve())
           {
-              menu_cell_basic_draw(ctx, cell_layer, "Who serves", OPP_SERVES, NULL);
+              menu_cell_basic_draw(ctx, cell_layer, WHO_SERVES, OPP_SERVES, NULL);
           }else{
-              menu_cell_basic_draw(ctx, cell_layer, "Who serves", YOU_SERVE, NULL);
+              menu_cell_basic_draw(ctx, cell_layer, WHO_SERVES, YOU_SERVE, NULL);
           }            
           break;
       case 2:
-          menu_cell_basic_draw(ctx, cell_layer, "Start match", NULL, NULL);
+          menu_cell_basic_draw(ctx, cell_layer, START_MATCH, NULL, NULL);
           break;
       default:
         break;
@@ -63,28 +58,25 @@ static int16_t get_cell_height_callback(struct MenuLayer *menu_layer, MenuIndex 
 static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
   switch(cell_index->row) {
     case 0:
-        //number_of_sets_window_push();
         if (match_config_is_best_of_3_sets())
         {
             match_config_set_best_of_5_sets();            
         }else{
             match_config_set_best_of_3_sets();
         }  
-        layer_mark_dirty(menu_layer_get_layer(menu_layer))  ;
+        layer_mark_dirty(menu_layer_get_layer(menu_layer));
         break;
     case 1:
-        //who_serves_window_push();
         if (match_config_does_opponent_serve())
         {
             match_config_set_you_serve();            
         }else{
             match_config_set_opponent_serves();
         }  
-        layer_mark_dirty(menu_layer_get_layer(menu_layer))  ;
+        layer_mark_dirty(menu_layer_get_layer(menu_layer));
         break;
     case 2:
       match_window_push();
-      //dialog_choice_window_push();
       break;
     default:
       break;

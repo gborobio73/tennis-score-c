@@ -6,3 +6,6 @@
 #define thirty "30"
 #define forty "40"
 #define ad "Ad"
+
+#define OK 0
+#define CANCEL 1
