@@ -4,7 +4,6 @@
 #include "../common/const.h"
 #include "score.h"
 #include "match_configuration.h"
-#include <pebble.h>
 
 static void new_set(Score* new_score, int who_won){
 	new_score->points[opp] =love;

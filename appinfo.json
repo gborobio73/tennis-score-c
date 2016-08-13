@@ -31,6 +31,11 @@
         "file": "images/tennis-ball.png"
       },
       {
+        "type": "bitmap",
+        "name": "WARNING",
+        "file": "images/warning.png"
+      },
+      {
         "type": "font",
         "name": "SCORE_FONT_34",
         "file": "fonts/digital-7.ttf"

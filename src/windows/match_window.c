@@ -1,5 +1,7 @@
+#include <pebble.h>
 #include "match_window.h"
 #include "dialog_choice_window.h"
+#include "dialog_message_window.h"
 #include "match_score_layer.h"
 #include "time_layer.h"
 #include "score_text_layer.h"
@@ -14,7 +16,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
     time_layer_update_time();
 }
 
-static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {    
     match_schore_cancel_last_point();
     Score* score = match_schore_get_current_score(); 
     match_score_layer_draw_score(score);
@@ -22,17 +24,34 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-    match_schore_oponent_point();
-    Score* score = match_schore_get_current_score(); 
-    match_score_layer_draw_score(score);
-    score_text_layer_update_text(score);
+    if (match_score_max_size_reached()/* max size reached */)
+    {
+        /* show alert window */
+        dialog_message_window_push();
+    }
+    else
+    {
+        match_schore_oponent_point();
+        Score* score = match_schore_get_current_score(); 
+        match_score_layer_draw_score(score);
+        score_text_layer_update_text(score);
+    }    
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    match_schore_your_point();
-    Score* score = match_schore_get_current_score(); 
-    match_score_layer_draw_score(score);
-    score_text_layer_update_text(score);
+    if (match_score_max_size_reached()/* max size reached */)
+    {
+        /* show alert window */
+        dialog_message_window_push();
+    }
+    else
+    {
+        match_schore_your_point();
+        Score* score = match_schore_get_current_score(); 
+        match_score_layer_draw_score(score);
+        score_text_layer_update_text(score);
+    }
+    
 }
 
 void selected_user_option(int option_choosed){
@@ -44,13 +63,7 @@ void selected_user_option(int option_choosed){
 }
 
 static void back_click_handler(ClickRecognizerRef recognizer, void *context) {  
-    if (match_score_is_match_over())
-    {
-        window_stack_pop(true);
-    }else
-    {
-        dialog_choice_window_push((ChoiceDialogWindowCallbacks) {.selected_user_option_callback = selected_user_option} );
-    } 
+    dialog_choice_window_push((ChoiceDialogWindowCallbacks) {.selected_user_option_callback = selected_user_option} );
 }
 
 static void click_config_provider(void *context) {
@@ -65,7 +78,7 @@ static void window_load(Window *window) {
     
     match_score_layer_init(window_layer);
 
-    match_schore_init(match_config_get_who_serves(), match_config_get_best_of_sets());
+    match_schore_init(match_config_get_who_serves(), match_config_get_best_of_sets(), SCORES_INITIAL_SIZE, SCORES_MAX_SIZE);
     Score* score = match_schore_get_current_score();
 
     match_score_layer_draw_score(score);
