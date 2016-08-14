@@ -5,4 +5,4 @@ Dialog an dmessage windows form here: https://github.com/pebble-examples/ui-patt
 pebble Aplite / Basalt: 144, 168
 pebble Chalk: 
 
-![alt tag](tennis-poc-menu-c/screenshots/Menu.Chalk.png)
+![alt tag](screenshots/Menu.Chalk.png)
