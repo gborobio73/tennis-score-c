@@ -18,6 +18,7 @@ Track the score meanwhile you are playing tennis.
 - Down -> point to you.
 - Select -> undo last point.
 - Back -> exit to main menu.
+Asterisc tracks who serves.
 
 ## Screenshots
 
