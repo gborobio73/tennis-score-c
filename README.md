@@ -1,11 +1,25 @@
 
 Tennis score for Pebble
 ==================
+Track the score meanwhile you are playing tennis.
 
-Dialog an dmessage windows form here: https://github.com/pebble-examples/ui-patterns
+## Usage
+**Menu**
 
-pebble Aplite / Basalt: 144, 168
-pebble Chalk: 
+- Select whether you will play best of 3 or best of 5 sets.
+
+- Select who starts serving.
+
+- Start match!
+ 
+**Match**
+
+- Up -> point to your opponent.
+- Down -> point to you.
+- Select -> undo last point.
+- Back -> exit to main menu.
+
+## Screenshots
 
 # Menu Pebble Round
 
@@ -26,3 +40,5 @@ pebble Chalk:
 # Score Pebble original
 
 ![](screenshots/pebble-orange-score.png)
+
+Dialog and message windows form here: https://github.com/pebble-examples/ui-patterns
