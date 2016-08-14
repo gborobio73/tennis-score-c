@@ -56,4 +56,6 @@ Dialog and message windows are based on Pebble examples UIPatterns: https://gith
 Limitations: **Tennis Score** for Pebble keeps track up to 180 points for Pebble Classic and Steel, and up to 600 points for the other models.
 
 ## License
-(c) Gonzalo Borobio
+
+Copyright (c) 2016 Gonzalo Borobio
+[![CC0](https://licensebuttons.net/l/by-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
