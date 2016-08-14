@@ -9,20 +9,20 @@ pebble Chalk:
 
 # Menu Pebble Round
 
-![](screenshots/Menu.Chalk.png)
+![](screenshots/pebble-time-round-black-menu.png)
 
 # Score Pebble Round
 
-![](screenshots/Score.Chalk.png)
+![](screenshots/pebble-time-round-red-score.png)
 
 # Menu Pebble Time
 
-![](screenshots/Menu.Basalt.png)
+![](screenshots/pebble-time-red-menu.png)
 
-# Score Pebble Tound
+# Score Pebble Time
 
-![](screenshots/Score.Basalt.png)
+![](screenshots/pebble-time-black_score.png)
 
 # Score Pebble original
 
-![](screenshots/Score.Aplite2.png)
+![](screenshots/pebble-orange-score.png)
