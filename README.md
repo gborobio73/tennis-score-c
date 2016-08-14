@@ -18,7 +18,7 @@ Works in Pebble Time Round, Time Steel, Time, Steel and classic.
  
 **Match**
 
-Use buttons ![alt tag](http://i.imgur.com/4i9NeDU.jpg) to track the score :
+Use buttons (http://i.imgur.com/4i9NeDU.jpg) to track the score :
 
 - Up -> point to your opponent
 
