@@ -20,15 +20,13 @@ Works in Pebble Time Round, Time Steel, Time, Steel and classic.
 
 Use buttons (http://i.imgur.com/4i9NeDU.jpg) to track the score :
 
-- Up -> point to your opponent
+- Up: point to your opponent
 
-- Down -> point to you
+- Down: point to you
 
-- Select -> undo last point; as many times as you want to
+- Select: undo last point; as many times as you want
 
-- Back -> exit to main menu
-
-
+- Back: exit to main menu
 
 **Score**
 
