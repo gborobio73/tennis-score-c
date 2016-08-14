@@ -5,22 +5,22 @@ Dialog an dmessage windows form here: https://github.com/pebble-examples/ui-patt
 pebble Aplite / Basalt: 144, 168
 pebble Chalk: 
 
-## Menu Pebble Round
+# Menu Pebble Round
 
 ![](screenshots/Menu.Chalk.png)
 
-## Score Pebble Round
+# Score Pebble Round
 
 ![](screenshots/Score.Chalk.png)
 
-## Menu Pebble Time
+# Menu Pebble Time
 
 ![](screenshots/Menu.Basalt.png)
 
-## Score Pebble Tound
+# Score Pebble Tound
 
 ![](screenshots/Score.Basalt.png)
 
-## Score Pebble original
+# Score Pebble original
 
-![](screenshots/Menu.Aplite2.png)
+![](screenshots/Score.Aplite2.png)
