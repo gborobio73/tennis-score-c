@@ -21,24 +21,16 @@ Track the score meanwhile you are playing tennis.
 
 ## Screenshots
 
-# Menu Pebble Round
-
 ![](screenshots/pebble-time-round-black-menu.png)
-
-# Score Pebble Round
 
 ![](screenshots/pebble-time-round-red-score.png)
 
-# Menu Pebble Time
-
 ![](screenshots/pebble-time-red-menu.png)
-
-# Score Pebble Time
 
 ![](screenshots/pebble-time-black_score.png)
 
-# Score Pebble original
-
 ![](screenshots/pebble-orange-score.png)
 
-Dialog and message windows form here: https://github.com/pebble-examples/ui-patterns
+## About
+
+Dialog and message windows based un UIPatterns example: https://github.com/pebble-examples/ui-patterns
