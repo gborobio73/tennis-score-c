@@ -59,4 +59,4 @@ Limitations: **Tennis Score** for Pebble keeps track up to 180 points for Pebble
 
 Copyright (c) 2016 Gonzalo Borobio
 
-[![CC0](https://licensebuttons.net/l/by-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+Licensed under the CC BY-SA license [![CC0](https://licensebuttons.net/l/by-sa/3.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
