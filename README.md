@@ -1,10 +1,9 @@
 
 Tennis Score for Pebble
 ==================
-Are you a tennis player and a Pebble owner? Now you can keep track of the score in your Pebble watch! 
-Track points, game, sets and who is serving. Update the score with one button touch; undo avilable. 
-You can choose between best of 3 or 5 sets; tiebreak for all sets.
-Shows time and match duration in minutes.
+Are you a tennis player and a Pebble owner?  Now you can play a match and keep track of the score in your Pebble!
+Tennis Score tracks points, games, sets and who is serving. You can update the score with one button touch; undo avilable. 
+You can choose between best of 3 or 5 sets; tiebreak for all sets. Shows current time and match duration in minutes.
 
 Works in Pebble Time Round, Time Steel, Time, Steel and classic.
 
@@ -19,6 +18,8 @@ Works in Pebble Time Round, Time Steel, Time, Steel and classic.
  
 **Match**
 
+Use buttons ![alt tag](http://i.imgur.com/4i9NeDU.jpg) to track the score :
+
 - Up -> point to your opponent
 
 - Down -> point to you
@@ -26,6 +27,8 @@ Works in Pebble Time Round, Time Steel, Time, Steel and classic.
 - Select -> undo last point; as many times as you want to
 
 - Back -> exit to main menu
+
+
 
 **Score**
 
