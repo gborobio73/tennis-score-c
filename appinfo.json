@@ -36,6 +36,11 @@
         "file": "images/warning.png"
       },
       {
+        "type": "bitmap",
+        "name": "CONFIRM",
+        "file": "images/confirm.png"
+      },
+      {
         "type": "font",
         "name": "SCORE_FONT_34",
         "file": "fonts/digital-7.ttf"
