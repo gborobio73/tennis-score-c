@@ -7,9 +7,9 @@ Works in Pebble Time Round, Time Steel, Time, Steel and Classic.
 ## Usage
 **Menu**
 
-- Select whether you will play best of 3 or best of 5 sets.
+- Select whether you will play best of 3 or best of 5 sets
 
-- Select who starts serving.
+- Select who starts serving
 
 - Start match!
 
