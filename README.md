@@ -1,8 +1,8 @@
 Tennis Score for Pebble
 ==================
-Are you a tennis player and a Pebble owner? Now you can play a match and keep track of the score in your Pebble! 
+Do you play tennis and own a Pebble watch? Now you can keep track of the score in your wrist!
 
-**Tennis Score** tracks points, games, sets and who is serving. Update the score by pressing a button; undo available. Choose between best of 3 or 5 sets; tiebreak for all sets. Shows current time and match duration.
+**Tennis Score** for Pebble tracks points, games, sets and who is serving. Update the score by pressing a button; undo available. Choose between best of 3 or 5 sets; tiebreak for all sets. Shows current time and match duration.
 
 Works in Pebble Time Round, Time Steel, Time, Steel and Classic.
 
@@ -53,7 +53,7 @@ Use [buttons](http://i.imgur.com/4i9NeDU.jpg) to track the score :
 
 ## About
 
-Dialog and message windows are based on Pebble examples UIPatterns: https://github.com/pebble-examples/ui-patterns
+Dialog and message windows are based on Pebble examples [!UIPatterns](https://github.com/pebble-examples/ui-patterns):
 
 Limitations: **Tennis Score** for Pebble keeps track up to 180 points for Pebble Classic and Steel, and up to 600 points for other models.
 
