@@ -44,7 +44,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    if (match_score_is_match_over())
+    if (!match_score_is_match_over())
     {
         statistics_window_push();
     }

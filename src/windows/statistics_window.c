@@ -13,26 +13,22 @@
 static Window *s_statistics_window;
 static TextLayer *s_title_layer;
 
-static void draw_statistics_layer(TextLayer *layer){
-    text_layer_set_background_color(layer, GColorClear);
-    text_layer_set_text_color(layer, GColorWhite);
-    text_layer_set_text(layer, "STATISTICS");
-    
-    static GFont s_font;
-    s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_SCORE_FONT_15));
-    text_layer_set_font(layer, s_font);
-
-    text_layer_set_text_alignment(layer, GTextAlignmentCenter);
-}
-
 static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
-    s_title_layer = text_layer_create(GRect(SCORE_TEXT_X, SCORE_TEXT_Y, 136, 27));
-    draw_statistics_layer(s_title_layer);
+    s_title_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) - 20,80, 40));
+    text_layer_set_background_color(s_title_layer, GColorDarkGray);
+    text_layer_set_text_color(s_title_layer, GColorWhite);
+    text_layer_set_text(s_title_layer, "POINTS");
+    
+    text_layer_set_font(s_title_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
+
+    text_layer_set_text_alignment(s_title_layer, GTextAlignmentCenter);
+
     layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
 
+    //PBL_IF_ROUND_ELSE((bounds.size.w - bitmap_bounds.size.w) / 2
 }
 
 static void window_unload(Window *window) {
