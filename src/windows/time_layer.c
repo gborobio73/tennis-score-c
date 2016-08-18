@@ -42,7 +42,10 @@ void time_layer_update_time() {
     strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
 
     text_layer_set_text(s_time_layer, s_buffer);
+}
 
+void time_layer_update_match_duration()
+{
     time_t match_now = time(NULL);
     int difference_in_seconds = match_now - match_started ;
     int minutes = ((difference_in_seconds ) / 60) % 60;
@@ -50,7 +53,6 @@ void time_layer_update_time() {
 
     static char match_time_buffer [6];
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", hours, minutes);
-    APP_LOG(APP_LOG_LEVEL_DEBUG, match_time_buffer);
     text_layer_set_text(s_match_time_layer, match_time_buffer);
     layer_mark_dirty(text_layer_get_layer(s_match_time_layer));
 }

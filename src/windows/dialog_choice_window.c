@@ -2,12 +2,6 @@
 #include "../common/texts.h"
 #include "../common/const.h"
 
-#if defined(PBL_PLATFORM_APLITE)
-  #define BACKGROUD_COLOR GColorMidnightGreen;
-#else
-  #define BACKGROUD_COLOR GColorMidnightGreen;
-#endif
-
 static Window *s_dialog_window;
 static TextLayer *s_label_layer;
 static BitmapLayer *s_icon_layer;

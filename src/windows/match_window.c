@@ -2,6 +2,7 @@
 #include "match_window.h"
 #include "dialog_choice_window.h"
 #include "dialog_message_window.h"
+#include "statistics_window.h"
 #include "match_score_layer.h"
 #include "time_layer.h"
 #include "score_text_layer.h"
@@ -14,6 +15,10 @@ static Window *s_match_window;
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
     time_layer_update_time();
+    if (!match_score_is_match_over())
+    {
+        time_layer_update_match_duration();
+    }    
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {    
@@ -39,19 +44,25 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    if (match_score_max_size_reached()/* max size reached */)
+    if (match_score_is_match_over())
     {
-        /* show alert window */
-        dialog_message_window_push();
+        statistics_window_push();
     }
     else
     {
-        match_schore_your_point();
-        Score* score = match_schore_get_current_score(); 
-        match_score_layer_draw_score(score);
-        score_text_layer_update_text(score);
-    }
-    
+        if (match_score_max_size_reached()/* max size reached */)
+        {
+            /* show alert window */
+            dialog_message_window_push();
+        }
+        else
+        {
+            match_schore_your_point();
+            Score* score = match_schore_get_current_score(); 
+            match_score_layer_draw_score(score);
+            score_text_layer_update_text(score);
+        }
+    }        
 }
 
 void selected_user_option(int option_choosed){
