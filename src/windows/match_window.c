@@ -36,15 +36,18 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     }
     else
     {
-        match_schore_oponent_point();
-        Score* score = match_schore_get_current_score(); 
-        match_score_layer_draw_score(score);
-        score_text_layer_update_text(score);
+        if (!match_score_is_match_over())
+        {
+            match_schore_oponent_point();
+            Score* score = match_schore_get_current_score(); 
+            match_score_layer_draw_score(score);
+            score_text_layer_update_text(score);
+        }        
     }    
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    if (!match_score_is_match_over())
+    if (!match_score_is_match_over()) //Change when ready
     {
         statistics_window_push();
     }
