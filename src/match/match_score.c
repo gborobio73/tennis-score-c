@@ -105,3 +105,7 @@ void match_schore_end_match(){
     match_score.scores_size =scores_initial_size;
 }
 
+MatchScore match_score_get_match_score(){
+	return match_score;
+}
+

@@ -2,4 +2,4 @@
 
 #include <pebble.h>
 
-void statistics_window_push();
+void stats_points_window_push();

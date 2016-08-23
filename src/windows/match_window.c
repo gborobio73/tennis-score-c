@@ -2,7 +2,7 @@
 #include "match_window.h"
 #include "dialog_choice_window.h"
 #include "dialog_message_window.h"
-#include "statistics_window.h"
+#include "stats_points_window.h"
 #include "match_score_layer.h"
 #include "time_layer.h"
 #include "score_text_layer.h"
@@ -49,7 +49,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
     if (!match_score_is_match_over()) //Change when ready
     {
-        statistics_window_push();
+        stats_points_window_push();
     }
     else
     {

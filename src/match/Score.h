@@ -6,6 +6,7 @@
 typedef struct
 {
     int who_serves;
+    int who_won_the_point;
     bool is_tie_break;
     bool match_is_over;
     int sets [2];

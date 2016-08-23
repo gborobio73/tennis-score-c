@@ -17,3 +17,4 @@ Score* match_schore_get_current_score();
 void match_schore_cancel_last_point();
 bool match_score_is_match_over();
 bool match_score_max_size_reached();
+MatchScore match_score_get_match_score();
