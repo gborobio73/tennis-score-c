@@ -6,6 +6,6 @@ typedef struct
 {
 	int opp_points;
 	int you_points;
-} MatchStatistics;
+} MatchStatisticsPoints;
 
-MatchStatistics match_statistics_calculate();
+MatchStatisticsPoints match_statistics_calculate_points();

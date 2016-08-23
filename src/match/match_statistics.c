@@ -2,11 +2,11 @@
 #include "match_score.h"
 #include "../common/const.h"
 
-static MatchStatistics match_statistics;
+static MatchStatisticsPoints match_statistics_points;
 
-MatchStatistics match_statistics_calculate(){
-	match_statistics.opp_points =0;
-	match_statistics.you_points =0;
+MatchStatisticsPoints match_statistics_calculate_points(){
+	match_statistics_points.opp_points =123;
+	match_statistics_points.you_points =147;
 
 	MatchScore match_score = match_score_get_match_score();
 
@@ -16,11 +16,12 @@ MatchStatistics match_statistics_calculate(){
 	{
 		if (match_score.scores[i].who_won_the_point == opp)
 		{
-			match_statistics.opp_points ++;
-		}else
+			match_statistics_points.opp_points ++;
+		}
+		else
 		{
-			match_statistics.you_points ++;
+			match_statistics_points.you_points ++;
 		}
 	}
-	return match_statistics;
+	return match_statistics_points;
 }
