@@ -2,10 +2,10 @@
 #include "match_score.h"
 #include "../common/const.h"
 
-static MatchStatisticsPoints match_statistics_points;
-static MatchTime match_time;
+static MatchStatsPoints match_statistics_points;
+static MatchStatsTime match_time;
 
-MatchTime match_statistics_calculate_match_duration(){
+MatchStatsTime match_statistics_calculate_match_duration(){
 	time_t match_now;
 	if (match_score_is_match_over())
 	{
@@ -20,7 +20,7 @@ MatchTime match_statistics_calculate_match_duration(){
     return match_time;
 }
 
-MatchStatisticsPoints match_statistics_calculate_points(){
+MatchStatsPoints match_statistics_calculate_points(){
 	match_statistics_points.opp_points =123;
 	match_statistics_points.you_points =147;
 

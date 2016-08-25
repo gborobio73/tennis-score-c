@@ -40,7 +40,7 @@ static void click_config_provider(void *context) {
 }
 
 static void window_load(Window *window) {
-    MatchStatisticsPoints statistics = match_statistics_calculate_points();
+    MatchStatsPoints statistics = match_statistics_calculate_points();
 
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
