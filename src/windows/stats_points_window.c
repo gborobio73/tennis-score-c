@@ -1,7 +1,7 @@
-#include "dialog_choice_window.h"
 #include "../common/texts.h"
 #include "../common/const.h"
 #include "../match/match_statistics.h"
+#include "stats_time_window.h"
 #include "fonts.h"
 
 #if defined(PBL_PLATFORM_CHALK)
@@ -31,7 +31,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    //navigate to time stats
+    stats_time_window_push();
 }
 
 static void click_config_provider(void *context) {
@@ -40,7 +40,7 @@ static void click_config_provider(void *context) {
 }
 
 static void window_load(Window *window) {
-	MatchStatisticsPoints statistics = match_statistics_calculate_points();
+    MatchStatisticsPoints statistics = match_statistics_calculate_points();
 
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
@@ -52,19 +52,18 @@ static void window_load(Window *window) {
     layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
 
     s_opp_points_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) - 30,80, 40));
-    snprintf(buffer_opp_points, 4, "%d", statistics.opp_points);	
+    snprintf(buffer_opp_points, 4, "%d", statistics.opp_points);    
     text_layer_set_text(s_opp_points_layer, buffer_opp_points);
     set_text_layer_config(s_opp_points_layer);
     fonts_set_text_layer_font_34(s_opp_points_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_opp_points_layer));    
 
     s_your_points_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) + 15,80, 40));
-    snprintf(buffer_you_points, 4, "%d", statistics.you_points);	
+    snprintf(buffer_you_points, 4, "%d", statistics.you_points);    
     text_layer_set_text(s_your_points_layer, buffer_you_points);
     set_text_layer_config(s_your_points_layer);
     fonts_set_text_layer_font_34(s_your_points_layer);
-    layer_add_child(window_layer, text_layer_get_layer(s_your_points_layer));    
-
+    layer_add_child(window_layer, text_layer_get_layer(s_your_points_layer)); 
 }
 
 static void window_unload(Window *window) {

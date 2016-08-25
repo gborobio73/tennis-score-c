@@ -22,8 +22,8 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {    
-    match_schore_cancel_last_point();
-    Score* score = match_schore_get_current_score(); 
+    match_score_cancel_last_point();
+    Score* score = match_score_get_current_score(); 
     match_score_layer_draw_score(score);
     score_text_layer_update_text(score);
 }
@@ -38,8 +38,8 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     {
         if (!match_score_is_match_over())
         {
-            match_schore_oponent_point();
-            Score* score = match_schore_get_current_score(); 
+            match_score_oponent_point();
+            Score* score = match_score_get_current_score(); 
             match_score_layer_draw_score(score);
             score_text_layer_update_text(score);
         }        
@@ -60,8 +60,8 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
         }
         else
         {
-            match_schore_your_point();
-            Score* score = match_schore_get_current_score(); 
+            match_score_your_point();
+            Score* score = match_score_get_current_score(); 
             match_score_layer_draw_score(score);
             score_text_layer_update_text(score);
         }
@@ -92,8 +92,8 @@ static void window_load(Window *window) {
     
     match_score_layer_init(window_layer);
 
-    match_schore_init(match_config_get_who_serves(), match_config_get_best_of_sets(), SCORES_INITIAL_SIZE, SCORES_MAX_SIZE);
-    Score* score = match_schore_get_current_score();
+    match_score_init(match_config_get_who_serves(), match_config_get_best_of_sets(), SCORES_INITIAL_SIZE, SCORES_MAX_SIZE);
+    Score* score = match_score_get_current_score();
 
     match_score_layer_draw_score(score);
 
@@ -111,7 +111,7 @@ static void window_unload(Window *window) {
     match_score_layer_destroy();
     time_layer_destroy();
     score_text_layer_destroy();
-    match_schore_end_match();
+    match_score_end_match();
     tick_timer_service_unsubscribe();
 }
 

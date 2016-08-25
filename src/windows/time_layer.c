@@ -1,4 +1,6 @@
 #include <pebble.h>
+#include "../match/match_score.h"
+#include "../match/match_statistics.h"
 
 #if defined(PBL_PLATFORM_CHALK)
     #define CURRENT_TIME_X 27
@@ -10,7 +12,6 @@
 
 static TextLayer *s_time_layer;
 static TextLayer *s_match_time_layer;
-static time_t match_started;
 
 static uint32_t resolve_font(){
     return PBL_IF_ROUND_ELSE(RESOURCE_ID_SCORE_FONT_20, RESOURCE_ID_SCORE_FONT_24);
@@ -46,13 +47,10 @@ void time_layer_update_time() {
 
 void time_layer_update_match_duration()
 {
-    time_t match_now = time(NULL);
-    int difference_in_seconds = match_now - match_started ;
-    int minutes = ((difference_in_seconds ) / 60) % 60;
-    int hours = difference_in_seconds / 3600; 
+    MatchTime match_time = match_statistics_calculate_match_duration();
 
     static char match_time_buffer [6];
-    snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", hours, minutes);
+    snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", match_time.hours, match_time.minutes);
     text_layer_set_text(s_match_time_layer, match_time_buffer);
     layer_mark_dirty(text_layer_get_layer(s_match_time_layer));
 }
@@ -66,8 +64,6 @@ void time_layer_init(Layer *window_layer){
     s_match_time_layer = text_layer_create(GRect(MATCH_TIME_X, resolve_Y(window_layer), 58, 28));
     draw_time_layer(s_match_time_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_match_time_layer));
-
-    match_started = time(NULL);
 }
 
 void time_layer_destroy(){

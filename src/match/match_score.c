@@ -19,7 +19,7 @@ bool match_score_max_size_reached(){
     return match_score.current_score_idx == scores_max_size -1;
 }
 
-static void match_score_resize_if_needed(){  
+void match_score_resize_if_needed(){  
     if (match_score.current_score_idx == match_score.scores_size - 1)
     {
         if (match_score_max_size_reached())/* reached max size */
@@ -36,13 +36,20 @@ static void match_score_resize_if_needed(){
     }  
 }
 
+void match_score_set_end_time_if_needed(){
+    if (match_score_is_match_over())
+    {
+        match_score.match_ended = time(NULL);
+    }
+}
 
-void match_schore_init(int who_starts_serving, int best_of_sets, int initial_size, int max_size){
+void match_score_init(int who_starts_serving, int best_of_sets, int initial_size, int max_size){
     scores_initial_size = initial_size;
     scores_max_size = max_size;
 
     match_score.current_score_idx =0;
     match_score.scores_size =scores_initial_size;
+    match_score.match_started =time(NULL);
 
     match_score.scores = malloc(sizeof(Score) * match_score.scores_size);
     match_score.scores[match_score.current_score_idx].is_tie_break = false;
@@ -64,7 +71,7 @@ bool match_score_is_match_over(){
     return match_score.scores[match_score.current_score_idx].match_is_over;
 }
 
-void match_schore_oponent_point(){  
+void match_score_oponent_point(){  
     match_score_resize_if_needed();
     if (!match_score_is_match_over())
     {             
@@ -73,10 +80,12 @@ void match_schore_oponent_point(){
             opp, 
             &match_score.scores[match_score.current_score_idx + 1]);    
         match_score.current_score_idx++;
+
+        match_score_set_end_time_if_needed();
     }      
 }
 
-void match_schore_your_point() {
+void match_score_your_point() {
     match_score_resize_if_needed(); 
     if (!match_score_is_match_over())
     {               
@@ -85,21 +94,23 @@ void match_schore_your_point() {
             you, 
             &match_score.scores[match_score.current_score_idx + 1]);
         match_score.current_score_idx++;
+
+        match_score_set_end_time_if_needed();
     } 
 }
 
-Score* match_schore_get_current_score(){
+Score* match_score_get_current_score(){
     return &match_score.scores[match_score.current_score_idx];
 }
 
-void match_schore_cancel_last_point(){
+void match_score_cancel_last_point(){
     if (match_score.current_score_idx > 0)
     {
         match_score.current_score_idx--;
     }    
 }
 
-void match_schore_end_match(){
+void match_score_end_match(){
     free(match_score.scores);
     match_score.current_score_idx =0;
     match_score.scores_size =scores_initial_size;
