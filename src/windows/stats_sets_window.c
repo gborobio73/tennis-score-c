@@ -45,7 +45,11 @@ static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
-    s_title_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / PBL_IF_ROUND_ELSE(4, 4)) - 20,80, 40));
+    s_title_layer = text_layer_create(
+        GRect(
+            (bounds.size.w / 2) - 40, 
+            PBL_IF_ROUND_ELSE(20, 10),
+            80, 40));
     text_layer_set_text(s_title_layer, "SETS");
     set_text_layer_config(s_title_layer);
     fonts_set_text_layer_font_20(s_title_layer);
@@ -57,7 +61,10 @@ static void window_load(Window *window) {
     
     for (int i = 0; i < match_config_get_best_of_sets(); ++i)
     {
-        s_opp_sets_layer[i] = text_layer_create(GRect((bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) - 30,25, 40));
+        s_opp_sets_layer[i] = text_layer_create(
+            GRect(
+                (bounds.size.w / 2) - (left - i * 25), 
+                (bounds.size.h / 2) - 40,25, 40));
         
         snprintf(buffer_games_opp[i], 2, "%d", score_detail.set_results[opp][i]);
         // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** opp %s ", buffer_games_opp[i]); 
@@ -69,7 +76,10 @@ static void window_load(Window *window) {
 
     for (int i = 0; i < match_config_get_best_of_sets(); ++i)
     {
-        s_you_sets_layer[i] = text_layer_create(GRect((bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) + 15,25, 40));
+        s_you_sets_layer[i] = text_layer_create(
+            GRect(
+                (bounds.size.w / 2) - (left - i * 25), 
+                (bounds.size.h / 2) + 0,25, 40));
         
         snprintf(buffer_games_you[i], 2, "%d", score_detail.set_results[you][i]);
         // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** you %s ", buffer_games_you[i]); 

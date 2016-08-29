@@ -39,7 +39,7 @@ static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
-    s_title_layer = text_layer_create(GRect((bounds.size.w / 2) - 60, (bounds.size.h / PBL_IF_ROUND_ELSE(4, 4)) - 20,120, 40));
+    s_title_layer = text_layer_create(GRect((bounds.size.w / 2) - 60, PBL_IF_ROUND_ELSE(20, 10),120, 40));
     text_layer_set_text(s_title_layer, "MATCH DURATION");
     set_text_layer_config(s_title_layer);
     fonts_set_text_layer_font_20(s_title_layer);

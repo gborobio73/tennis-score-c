@@ -1,7 +1,7 @@
 #include "../common/texts.h"
 #include "../common/const.h"
 #include "../match/match_statistics.h"
-#include "stats_time_window.h"
+#include "stats_sets_time_window.h"
 #include "fonts.h"
 
 #if defined(PBL_PLATFORM_CHALK)
@@ -29,7 +29,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    stats_time_window_push();
+    stats_sets_time_window_push();
 }
 
 static void click_config_provider(void *context) {
@@ -43,20 +43,25 @@ static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
-    s_title_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / PBL_IF_ROUND_ELSE(4, 4)) - 20,80, 40));
+    s_title_layer = text_layer_create(
+        GRect(
+            (bounds.size.w / 2) - 40, 
+            PBL_IF_ROUND_ELSE(20, 10),
+            80, 40));
+
     text_layer_set_text(s_title_layer, "POINTS WON");
     set_text_layer_config(s_title_layer);
     fonts_set_text_layer_font_20(s_title_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
 
-    s_points_layer[opp] = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) - 30,80, 40));
+    s_points_layer[opp] = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) - 40,80, 40));
     snprintf(buffer_points[opp], 4, "%d", statistics.points[opp]);    
     text_layer_set_text(s_points_layer[opp], buffer_points[opp]);
     set_text_layer_config(s_points_layer[opp]);
     fonts_set_text_layer_font_34(s_points_layer[opp]);
     layer_add_child(window_layer, text_layer_get_layer(s_points_layer[opp]));    
 
-    s_points_layer[you] = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) + 15,80, 40));
+    s_points_layer[you] = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) + 0,80, 40));
     snprintf(buffer_points[you], 4, "%d", statistics.points[you]);    
     text_layer_set_text(s_points_layer[you], buffer_points[you]);
     set_text_layer_config(s_points_layer[you]);
