@@ -14,11 +14,9 @@
 
 static Window *s_stats_points_window;
 static TextLayer *s_title_layer;
-static TextLayer *s_opp_points_layer;
-static TextLayer *s_your_points_layer;
+static TextLayer *s_points_layer[2];
 
-static char buffer_opp_points[4];
-static char buffer_you_points[4];
+static char buffer_points[2][4];
 
 static void set_text_layer_config(TextLayer *s_text_layer){
     text_layer_set_background_color(s_text_layer, GColorClear);
@@ -40,7 +38,7 @@ static void click_config_provider(void *context) {
 }
 
 static void window_load(Window *window) {
-    MatchStatsPoints statistics = match_statistics_calculate_points();
+    MatchStatistics statistics = match_statistics_get();
 
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
@@ -51,30 +49,30 @@ static void window_load(Window *window) {
     fonts_set_text_layer_font_20(s_title_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
 
-    s_opp_points_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) - 30,80, 40));
-    snprintf(buffer_opp_points, 4, "%d", statistics.opp_points);    
-    text_layer_set_text(s_opp_points_layer, buffer_opp_points);
-    set_text_layer_config(s_opp_points_layer);
-    fonts_set_text_layer_font_34(s_opp_points_layer);
-    layer_add_child(window_layer, text_layer_get_layer(s_opp_points_layer));    
+    s_points_layer[opp] = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) - 30,80, 40));
+    snprintf(buffer_points[opp], 4, "%d", statistics.points[opp]);    
+    text_layer_set_text(s_points_layer[opp], buffer_points[opp]);
+    set_text_layer_config(s_points_layer[opp]);
+    fonts_set_text_layer_font_34(s_points_layer[opp]);
+    layer_add_child(window_layer, text_layer_get_layer(s_points_layer[opp]));    
 
-    s_your_points_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) + 15,80, 40));
-    snprintf(buffer_you_points, 4, "%d", statistics.you_points);    
-    text_layer_set_text(s_your_points_layer, buffer_you_points);
-    set_text_layer_config(s_your_points_layer);
-    fonts_set_text_layer_font_34(s_your_points_layer);
-    layer_add_child(window_layer, text_layer_get_layer(s_your_points_layer)); 
+    s_points_layer[you] = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) + 15,80, 40));
+    snprintf(buffer_points[you], 4, "%d", statistics.points[you]);    
+    text_layer_set_text(s_points_layer[you], buffer_points[you]);
+    set_text_layer_config(s_points_layer[you]);
+    fonts_set_text_layer_font_34(s_points_layer[you]);
+    layer_add_child(window_layer, text_layer_get_layer(s_points_layer[you])); 
 }
 
 static void window_unload(Window *window) {
     text_layer_destroy(s_title_layer);  
     s_title_layer=NULL;  
 
-	text_layer_destroy(s_opp_points_layer);  
-    s_opp_points_layer=NULL;  
+	text_layer_destroy(s_points_layer[opp]);  
+    s_points_layer[opp]=NULL; 
 
-    text_layer_destroy(s_your_points_layer);  
-    s_your_points_layer=NULL;  
+    text_layer_destroy(s_points_layer[you]);  
+    s_points_layer[you]=NULL;  
     
     window_destroy(window);
     s_stats_points_window = NULL;

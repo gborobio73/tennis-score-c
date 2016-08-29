@@ -45,7 +45,7 @@ static void window_load(Window *window) {
     fonts_set_text_layer_font_20(s_title_layer);
     layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
 
-    MatchStatsTime match_time = match_statistics_calculate_match_duration();
+    MatchDuration match_time = match_statistics_calculate_match_duration();
     static char match_time_buffer [6];
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", match_time.hours, match_time.minutes);
 

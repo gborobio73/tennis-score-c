@@ -47,7 +47,7 @@ void time_layer_update_time() {
 
 void time_layer_update_match_duration()
 {
-    MatchStatsTime match_time = match_statistics_calculate_match_duration();
+    MatchDuration match_time = match_statistics_calculate_match_duration();
 
     static char match_time_buffer [6];
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", match_time.hours, match_time.minutes);

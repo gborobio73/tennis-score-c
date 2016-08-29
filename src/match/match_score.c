@@ -14,8 +14,8 @@ static int scores_initial_size;
 static int scores_max_size;
 
 bool match_score_max_size_reached(){
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_score_max_size_reached  *** current %d, max size %d", 
-        match_score.current_score_idx, scores_max_size);
+    // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_score_max_size_reached  *** current %d, max size %d", 
+    //     match_score.current_score_idx, scores_max_size);
     return match_score.current_score_idx == scores_max_size -1;
 }
 

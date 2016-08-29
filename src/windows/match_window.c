@@ -2,12 +2,13 @@
 #include "match_window.h"
 #include "dialog_choice_window.h"
 #include "dialog_message_window.h"
-#include "stats_points_window.h"
+#include "stats_sets_window.h"
 #include "match_score_layer.h"
 #include "time_layer.h"
 #include "score_text_layer.h"
 #include "../match/match_configuration.h"
 #include "../match/match_score.h"
+#include "../match/match_statistics.h"
 #include "../common/const.h"
 #include "../match/score.h"
 
@@ -47,9 +48,10 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    if (!match_score_is_match_over()) //Change when ready
+    if (match_score_is_match_over()) //Change when ready
     {
-        stats_points_window_push();
+        match_statistics_calculate();        
+        stats_sets_window_push();
     }
     else
     {
@@ -113,6 +115,7 @@ static void window_unload(Window *window) {
     score_text_layer_destroy();
     match_score_end_match();
     tick_timer_service_unsubscribe();
+    match_statistics_destroy();
 }
 
 void match_window_push() {
