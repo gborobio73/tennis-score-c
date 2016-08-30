@@ -14,7 +14,7 @@ TextLayer* stats_window_common_create_title(Window *window, const char * text){
     TextLayer* s_title_layer = text_layer_create(
         GRect(
             bounds.origin.x, PBL_IF_ROUND_ELSE(15, 10),
-            bounds.size.w, 15));
+            bounds.size.w, 20));
 
     text_layer_set_text(s_title_layer, text);
     text_layer_set_background_color(s_title_layer, GColorClear);

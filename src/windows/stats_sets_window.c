@@ -45,9 +45,9 @@ static void window_load(Window *window) {
 
     MatchStatistics score_detail= match_statistics_get();
 
-    float left = match_config_get_best_of_sets() * 26 / 2;
+    float left = 5 * 26.5 / 2;
     
-    for (int i = 0; i < match_config_get_best_of_sets(); ++i)
+    for (int i = 0; i < 5; ++i)
     {
         snprintf(buffer_games_opp[i], 2, "%d", score_detail.set_results[opp][i]);
 
@@ -60,7 +60,7 @@ static void window_load(Window *window) {
             true);
     }
 
-    for (int i = 0; i < match_config_get_best_of_sets(); ++i)
+    for (int i = 0; i < 5; ++i)
     {
         snprintf(buffer_games_you[i], 2, "%d", score_detail.set_results[you][i]);
         
