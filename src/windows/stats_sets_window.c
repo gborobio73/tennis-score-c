@@ -3,6 +3,7 @@
 #include "../match/match_statistics.h"
 #include "../match/match_configuration.h"
 #include "stats_points_window.h"
+#include "stats_window_common.h"
 #include "fonts.h"
 
 #if defined(PBL_PLATFORM_CHALK)
@@ -22,12 +23,6 @@ static TextLayer *s_you_sets_layer[5];
 static char buffer_games_opp[5][2];
 static char buffer_games_you[5][2];
 
-static void set_text_layer_config(TextLayer *s_text_layer){
-    text_layer_set_background_color(s_text_layer, GColorClear);
-    text_layer_set_text_color(s_text_layer, GColorWhite);    
-    text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
-}
-
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     window_stack_pop(true);    
 }
@@ -43,17 +38,10 @@ static void click_config_provider(void *context) {
 
 static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
-    GRect bounds = layer_get_bounds(window_layer);
 
-    s_title_layer = text_layer_create(
-        GRect(
-            (bounds.size.w / 2) - 40, 
-            PBL_IF_ROUND_ELSE(20, 10),
-            80, 40));
-    text_layer_set_text(s_title_layer, "SETS");
-    set_text_layer_config(s_title_layer);
-    fonts_set_text_layer_font_20(s_title_layer);
-    layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
+    s_title_layer = stats_window_common_create_title(window,  "SETS");
+
+    GRect bounds = layer_get_bounds(window_layer);
 
     MatchStatistics score_detail= match_statistics_get();
 
@@ -61,32 +49,29 @@ static void window_load(Window *window) {
     
     for (int i = 0; i < match_config_get_best_of_sets(); ++i)
     {
-        s_opp_sets_layer[i] = text_layer_create(
-            GRect(
-                (bounds.size.w / 2) - (left - i * 25), 
-                (bounds.size.h / 2) - 40,25, 40));
-        
         snprintf(buffer_games_opp[i], 2, "%d", score_detail.set_results[opp][i]);
-        // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** opp %s ", buffer_games_opp[i]); 
-        text_layer_set_text(s_opp_sets_layer[i], buffer_games_opp[i]);
-        set_text_layer_config(s_opp_sets_layer[i]);
-        fonts_set_text_layer_font_34(s_opp_sets_layer[i]); 
-        layer_add_child(window_layer, text_layer_get_layer(s_opp_sets_layer[i]));
+
+        s_opp_sets_layer[i] = stats_window_common_create_layer(
+            window,
+            GRect(
+                (bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) - 35,
+                //25, 30), 
+                20, 30), 
+            buffer_games_opp[i],
+            true);
     }
 
     for (int i = 0; i < match_config_get_best_of_sets(); ++i)
     {
-        s_you_sets_layer[i] = text_layer_create(
-            GRect(
-                (bounds.size.w / 2) - (left - i * 25), 
-                (bounds.size.h / 2) + 0,25, 40));
-        
         snprintf(buffer_games_you[i], 2, "%d", score_detail.set_results[you][i]);
-        // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** you %s ", buffer_games_you[i]); 
-        text_layer_set_text(s_you_sets_layer[i], buffer_games_you[i]);
-        set_text_layer_config(s_you_sets_layer[i]);
-        fonts_set_text_layer_font_34(s_you_sets_layer[i]); 
-        layer_add_child(window_layer, text_layer_get_layer(s_you_sets_layer[i]));
+        
+        s_you_sets_layer[i] = stats_window_common_create_layer(
+            window,
+            GRect(
+                (bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) + 5,
+                //25, 30), 
+                20, 30), 
+            buffer_games_you[i], true);
     }
 }
 

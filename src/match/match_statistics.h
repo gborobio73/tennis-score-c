@@ -1,6 +1,5 @@
 #pragma once
 
-
 typedef struct{
 	int minutes;
 	int hours;

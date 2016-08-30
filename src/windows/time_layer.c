@@ -50,6 +50,7 @@ void time_layer_update_match_duration()
     MatchDuration match_time = match_statistics_calculate_match_duration();
 
     static char match_time_buffer [6];
+    //%.2d -> . indicates min number of difits printed for integers (d)
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", match_time.hours, match_time.minutes);
     text_layer_set_text(s_match_time_layer, match_time_buffer);
     layer_mark_dirty(text_layer_get_layer(s_match_time_layer));

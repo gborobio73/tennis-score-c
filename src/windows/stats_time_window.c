@@ -2,6 +2,7 @@
 #include "../common/const.h"
 #include "../match/match_statistics.h"
 #include "stats_time_window.h"
+#include "stats_window_common.h"
 #include "fonts.h"
 
 #if defined(PBL_PLATFORM_CHALK)
@@ -15,12 +16,6 @@
 static Window *s_stats_time_window;
 static TextLayer *s_title_layer;
 static TextLayer *s_match_time_layer;
-
-static void set_text_layer_config(TextLayer *s_text_layer){
-    text_layer_set_background_color(s_text_layer, GColorClear);
-    text_layer_set_text_color(s_text_layer, GColorWhite);    
-    text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
-}
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     window_stack_pop(true);    
@@ -37,23 +32,21 @@ static void click_config_provider(void *context) {
 
 static void window_load(Window *window) {    
     Layer *window_layer = window_get_root_layer(window);
-    GRect bounds = layer_get_bounds(window_layer);
+    
+    s_title_layer = stats_window_common_create_title(window,  "MATCH DURATION");
 
-    s_title_layer = text_layer_create(GRect((bounds.size.w / 2) - 60, PBL_IF_ROUND_ELSE(20, 10),120, 40));
-    text_layer_set_text(s_title_layer, "MATCH DURATION");
-    set_text_layer_config(s_title_layer);
-    fonts_set_text_layer_font_20(s_title_layer);
-    layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
+    GRect bounds = layer_get_bounds(window_layer);
 
     MatchDuration match_time = match_statistics_calculate_match_duration();
     static char match_time_buffer [6];
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", match_time.hours, match_time.minutes);
 
-    s_match_time_layer = text_layer_create(GRect((bounds.size.w / 2) - 40, (bounds.size.h / 2) - 20,80, 40));
-    text_layer_set_text(s_match_time_layer, match_time_buffer);
-    set_text_layer_config(s_match_time_layer);
-    fonts_set_text_layer_font_34(s_match_time_layer);
-    layer_add_child(window_layer, text_layer_get_layer(s_match_time_layer));    
+     s_match_time_layer = stats_window_common_create_layer(
+            window,
+            GRect(bounds.origin.x, (bounds.size.h / 2) - 15,
+            bounds.size.w, 30), 
+            match_time_buffer, true);
+
 }
 
 static void window_unload(Window *window) {

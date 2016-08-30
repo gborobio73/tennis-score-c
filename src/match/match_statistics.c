@@ -23,6 +23,7 @@ static void initialize_structure(){
 	{
 		match_statistics->set_results[opp][i] =0;
 		match_statistics->set_results[you][i] =0;
+		match_statistics->set_duration[i] =0;
 	}
 }
 

@@ -3,6 +3,7 @@
 #include "../match/match_statistics.h"
 #include "../match/match_configuration.h"
 #include "stats_time_window.h"
+#include "stats_window_common.h"
 #include "fonts.h"
 
 #if defined(PBL_PLATFORM_CHALK)
@@ -18,13 +19,7 @@ static TextLayer *s_title_layer;
 
 static TextLayer *s_sets_time_layer[5];
 
-static char buffer_sets_time[5][15];
-
-static void set_text_layer_config(TextLayer *s_text_layer){
-    text_layer_set_background_color(s_text_layer, GColorClear);
-    text_layer_set_text_color(s_text_layer, GColorWhite);    
-    text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
-}
+static char buffer_sets_time[5][9];
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     window_stack_pop(true);    
@@ -43,57 +38,37 @@ static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
-    s_title_layer = text_layer_create(GRect((bounds.size.w / 2) - 60, PBL_IF_ROUND_ELSE(20, 10),120, 40));
-    text_layer_set_text(s_title_layer, "SETS DURATION");
-    set_text_layer_config(s_title_layer);
-    fonts_set_text_layer_font_20(s_title_layer);
-    layer_add_child(window_layer, text_layer_get_layer(s_title_layer));    
+    s_title_layer = stats_window_common_create_title(window,  "SETS DURATION");
+    
+    MatchStatistics score_detail= match_statistics_get();
 
-    float top = (match_config_get_best_of_sets() * 20 / 2);
-    for (int i = 0; i < match_config_get_best_of_sets(); ++i)
+    int start_from_y = 15 + PBL_IF_ROUND_ELSE(20, 10);
+    if (match_config_is_best_of_3_sets())
     {
-        s_sets_time_layer[i] = text_layer_create(
-            GRect(
-            (bounds.size.w / 2) - 40, 
-            (bounds.size.h / 2) - (top - i * 20),
-            80, 40));
-        
-        snprintf(buffer_sets_time[i], 15, "SET %d", i);
-        // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** opp %s ", buffer_games_opp[i]); 
-        text_layer_set_text(s_sets_time_layer[i], buffer_sets_time[i]);
-        set_text_layer_config(s_sets_time_layer[i]);
-        fonts_set_text_layer_font_20(s_sets_time_layer[i]); 
-        text_layer_set_text_alignment(s_sets_time_layer[i], GTextAlignmentLeft);
-        layer_add_child(window_layer, text_layer_get_layer(s_sets_time_layer[i]));
+        start_from_y = start_from_y + 10;
     }
 
-    // MatchStatistics score_detail= match_statistics_get();
+    float every_y = (bounds.size.h - start_from_y) / match_config_get_best_of_sets();
 
-    // float left = match_config_get_best_of_sets() * 25 / 2;
-    
-    // for (int i = 0; i < match_config_get_best_of_sets(); ++i)
-    // {
-    //     s_opp_sets_layer[i] = text_layer_create(GRect((bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) - 30,25, 40));
+    for (int i = 0; i < match_config_get_best_of_sets(); ++i)
+    {
+        int hours = score_detail.set_duration[i] / 3600;
+        int minutes = (score_detail.set_duration[i] / 60) % 60; 
+        int seconds = score_detail.set_duration[i] % 60;        
         
-    //     snprintf(buffer_games_opp[i], 2, "%d", score_detail.set_results[opp][i]);
-    //     // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** opp %s ", buffer_games_opp[i]); 
-    //     text_layer_set_text(s_opp_sets_layer[i], buffer_games_opp[i]);
-    //     set_text_layer_config(s_opp_sets_layer[i]);
-    //     fonts_set_text_layer_font_34(s_opp_sets_layer[i]); 
-    //     layer_add_child(window_layer, text_layer_get_layer(s_opp_sets_layer[i]));
-    // }
+        snprintf(buffer_sets_time[i], sizeof(buffer_sets_time[i]), "%.2d:%.2d:%.2d\n", hours, minutes, seconds);
+        
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** set %d lasted %d seconds", 
+            i, (int)score_detail.set_duration[i]);
 
-    // for (int i = 0; i < match_config_get_best_of_sets(); ++i)
-    // {
-    //     s_you_sets_layer[i] = text_layer_create(GRect((bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) + 15,25, 40));
-        
-    //     snprintf(buffer_games_you[i], 2, "%d", score_detail.set_results[you][i]);
-    //     // APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** you %s ", buffer_games_you[i]); 
-    //     text_layer_set_text(s_you_sets_layer[i], buffer_games_you[i]);
-    //     set_text_layer_config(s_you_sets_layer[i]);
-    //     fonts_set_text_layer_font_34(s_you_sets_layer[i]); 
-    //     layer_add_child(window_layer, text_layer_get_layer(s_you_sets_layer[i]));
-    // }
+        s_sets_time_layer[i] = stats_window_common_create_layer(
+            window,
+            GRect(
+                bounds.origin.x, start_from_y + (i * every_y),
+                bounds.size.w, 30), 
+            buffer_sets_time[i],
+            match_config_is_best_of_3_sets());
+    }
 }
 
 static void window_unload(Window *window) {

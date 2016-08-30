@@ -59,6 +59,26 @@
         "type": "font",
         "name": "SCORE_FONT_15",
         "file": "fonts/digital-7.ttf"
+      },
+      {
+        "type": "font",
+        "name": "STATS_22",
+        "file": "fonts/Heebo-Thin.ttf"
+      },
+      {
+        "type": "font",
+        "name": "STATS_16",
+        "file": "fonts/Heebo-Thin.ttf"
+      },
+      {
+        "type": "font",
+        "name": "STATS_19",
+        "file": "fonts/Heebo-Thin.ttf"
+      },
+      {
+        "type": "font",
+        "name": "STATS_12",
+        "file": "fonts/Heebo-Thin.ttf"
       }
     ]
   }
