@@ -39,21 +39,21 @@ static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
-    snprintf(buffer_points[opp], 4, "%d", statistics.points[opp]);    
+    snprintf(buffer_points[opp], 4, "%.3d", statistics.points[opp]);    
     s_points_layer[opp] = stats_window_common_create_layer(
             window,
             GRect(
-            bounds.origin.x, (bounds.size.h / 2) - 35,
-            bounds.size.w, 30), 
+            (bounds.size.w / 2) - 37.5, (bounds.size.h / 2) - 41,
+            75, 40), 
             buffer_points[opp],
             true);
 
-    snprintf(buffer_points[you], 4, "%d", statistics.points[you]);    
+    snprintf(buffer_points[you], 4, "%.3d", statistics.points[you]);    
     s_points_layer[you] = stats_window_common_create_layer(
         window,
         GRect(
-            bounds.origin.x, (bounds.size.h / 2) + 5,
-            bounds.size.w, 30), 
+            (bounds.size.w / 2) - 37.5, (bounds.size.h / 2) + 1,
+            75, 40), 
         buffer_points[you],
         true);
     

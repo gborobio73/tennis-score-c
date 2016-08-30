@@ -45,7 +45,7 @@ static void window_load(Window *window) {
 
     MatchStatistics score_detail= match_statistics_get();
 
-    float left = match_config_get_best_of_sets() * 25 / 2;
+    float left = match_config_get_best_of_sets() * 26 / 2;
     
     for (int i = 0; i < match_config_get_best_of_sets(); ++i)
     {
@@ -54,9 +54,8 @@ static void window_load(Window *window) {
         s_opp_sets_layer[i] = stats_window_common_create_layer(
             window,
             GRect(
-                (bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) - 35,
-                //25, 30), 
-                20, 30), 
+                (bounds.size.w / 2) - (left - i * 27), (bounds.size.h / 2) - 41,                
+                25, 40), 
             buffer_games_opp[i],
             true);
     }
@@ -68,9 +67,8 @@ static void window_load(Window *window) {
         s_you_sets_layer[i] = stats_window_common_create_layer(
             window,
             GRect(
-                (bounds.size.w / 2) - (left - i * 25), (bounds.size.h / 2) + 5,
-                //25, 30), 
-                20, 30), 
+                (bounds.size.w / 2) - (left - i * 27), (bounds.size.h / 2) + 1,                
+                25, 40), 
             buffer_games_you[i], true);
     }
 }

@@ -65,7 +65,7 @@ static void window_load(Window *window) {
             window,
             GRect(
                 bounds.origin.x, start_from_y + (i * every_y),
-                bounds.size.w, 30), 
+                bounds.size.w, 25), 
             buffer_sets_time[i],
             match_config_is_best_of_3_sets());
     }

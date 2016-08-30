@@ -75,6 +75,7 @@ MatchDuration match_statistics_calculate_match_duration(){
 		match_now = time(NULL);
 	}
     int difference_in_seconds = match_now - match_score_get_match_score().match_started ;
+    match_time.seconds = difference_in_seconds % 60;
     match_time.minutes = ((difference_in_seconds ) / 60) % 60;
     match_time.hours = difference_in_seconds / 3600; 
 

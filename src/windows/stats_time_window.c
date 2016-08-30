@@ -38,13 +38,15 @@ static void window_load(Window *window) {
     GRect bounds = layer_get_bounds(window_layer);
 
     MatchDuration match_time = match_statistics_calculate_match_duration();
-    static char match_time_buffer [6];
-    snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d\n", match_time.hours, match_time.minutes);
+    static char match_time_buffer [9];
+    snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d:%.2d\n", 
+        match_time.hours, match_time.minutes, match_time.seconds);
 
      s_match_time_layer = stats_window_common_create_layer(
             window,
-            GRect(bounds.origin.x, (bounds.size.h / 2) - 15,
-            bounds.size.w, 30), 
+            GRect(
+                (bounds.size.w / 2) - 62.5, (bounds.size.h / 2) - 20,
+                125, 40), 
             match_time_buffer, true);
 
 }
