@@ -66,7 +66,7 @@ static void window_load(Window *window) {
     int start_from_y = 20 + PBL_IF_ROUND_ELSE(20, 10);
 
     int box_h = 40;
-    float every_y = box_h +5;
+    float every_y = box_h +2;
 
     for (int i = 0; i < 5; ++i)
     {
