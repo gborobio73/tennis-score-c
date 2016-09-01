@@ -29,7 +29,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    stats_time_window_push();
+    
 }
 
 static void click_config_provider(void *context) {

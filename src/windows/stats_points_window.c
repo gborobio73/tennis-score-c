@@ -1,7 +1,8 @@
 #include "../common/texts.h"
 #include "../common/const.h"
 #include "../match/match_statistics.h"
-#include "stats_sets_time_window.h"
+#include "stats_points_window.h"
+#include "stats_time_window.h"
 #include "stats_window_common.h"
 #include "fonts.h"
 
@@ -24,7 +25,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    stats_sets_time_window_push();
+    stats_time_window_push();    
 }
 
 static void click_config_provider(void *context) {

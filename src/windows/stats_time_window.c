@@ -2,6 +2,7 @@
 #include "../common/const.h"
 #include "../match/match_statistics.h"
 #include "stats_time_window.h"
+#include "stats_sets_time_window.h"
 #include "stats_window_common.h"
 #include "fonts.h"
 
@@ -22,7 +23,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    
+    stats_sets_time_window_push();
 }
 
 static void click_config_provider(void *context) {
@@ -42,11 +43,16 @@ static void window_load(Window *window) {
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d:%.2d\n", 
         match_time.hours, match_time.minutes, match_time.seconds);
 
-     s_match_time_layer = stats_window_common_create_and_add_layer(
+    int padding = 28;
+    int box_x = padding / 2 ;
+    int box_w = bounds.size.w - padding;
+    int box_h = 40;
+
+    s_match_time_layer = stats_window_common_create_and_add_layer(
             window,
             GRect(
-                (bounds.size.w / 2) - 62.5, (bounds.size.h / 2) - 20,
-                125, 40), 
+                box_x, (bounds.size.h / 2) - (box_h / 2),
+                box_w, box_h), 
             match_time_buffer, true);
 
 }
