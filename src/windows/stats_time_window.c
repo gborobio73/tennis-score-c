@@ -33,7 +33,7 @@ static void click_config_provider(void *context) {
 static void window_load(Window *window) {    
     Layer *window_layer = window_get_root_layer(window);
     
-    s_title_layer = stats_window_common_create_title(window,  "MATCH DURATION");
+    s_title_layer = stats_window_common_create_and_add_title(window,  "MATCH DURATION");
 
     GRect bounds = layer_get_bounds(window_layer);
 
@@ -42,7 +42,7 @@ static void window_load(Window *window) {
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d:%.2d\n", 
         match_time.hours, match_time.minutes, match_time.seconds);
 
-     s_match_time_layer = stats_window_common_create_layer(
+     s_match_time_layer = stats_window_common_create_and_add_layer(
             window,
             GRect(
                 (bounds.size.w / 2) - 62.5, (bounds.size.h / 2) - 20,

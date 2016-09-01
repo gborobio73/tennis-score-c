@@ -34,26 +34,26 @@ static void click_config_provider(void *context) {
 
 static void window_load(Window *window) {
     MatchStatistics statistics = match_statistics_get();
-    s_title_layer = stats_window_common_create_title(window,  "POINTS WON");
+    s_title_layer = stats_window_common_create_and_add_title(window,  "POINTS WON");
 
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
-    int box_h = 75;
+    int box_w = 57.5;
     snprintf(buffer_points[opp], sizeof(buffer_points[opp]), "%.3d", statistics.points[opp]);    
-    s_points_layer[opp] = stats_window_common_create_layer(
+    s_points_layer[opp] = stats_window_common_create_and_add_layer(
             window,
             GRect(
-            (bounds.size.w / 2) - (box_h / 2), (bounds.size.h / 2) - 41,
-            box_h, 40), 
+            (bounds.size.w / 2) - (box_w / 2), (bounds.size.h / 2) - 41,
+            box_w, 40), 
             buffer_points[opp],
             true);
 
     snprintf(buffer_points[you], sizeof(buffer_points[you]), "%.3d", statistics.points[you]);    
-    s_points_layer[you] = stats_window_common_create_layer(
+    s_points_layer[you] = stats_window_common_create_and_add_layer(
         window,
         GRect(
-            (bounds.size.w / 2) - (box_h / 2), (bounds.size.h / 2) + 1,
-            box_h, 40), 
+            (bounds.size.w / 2) - (box_w / 2), (bounds.size.h / 2) + 1,
+            box_w, 40), 
         buffer_points[you],
         true);
     

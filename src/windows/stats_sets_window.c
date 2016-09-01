@@ -39,7 +39,7 @@ static void click_config_provider(void *context) {
 static void window_load(Window *window) {
     Layer *window_layer = window_get_root_layer(window);
 
-    s_title_layer = stats_window_common_create_title(window,  "SETS");
+    s_title_layer = stats_window_common_create_and_add_title(window,  "SETS");
 
     GRect bounds = layer_get_bounds(window_layer);
 
@@ -51,7 +51,7 @@ static void window_load(Window *window) {
     {
         snprintf(buffer_games_opp[i], 2, "%d", score_detail.set_results[opp][i]);
 
-        s_opp_sets_layer[i] = stats_window_common_create_layer(
+        s_opp_sets_layer[i] = stats_window_common_create_and_add_layer(
             window,
             GRect(
                 (bounds.size.w / 2) - (left - i * 27), (bounds.size.h / 2) - 41,                
@@ -64,7 +64,7 @@ static void window_load(Window *window) {
     {
         snprintf(buffer_games_you[i], 2, "%d", score_detail.set_results[you][i]);
         
-        s_you_sets_layer[i] = stats_window_common_create_layer(
+        s_you_sets_layer[i] = stats_window_common_create_and_add_layer(
             window,
             GRect(
                 (bounds.size.w / 2) - (left - i * 27), (bounds.size.h / 2) + 1,                
