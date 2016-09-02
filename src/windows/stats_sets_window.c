@@ -45,8 +45,19 @@ static void window_load(Window *window) {
 
     MatchStatistics score_detail= match_statistics_get();
 
+    // score_detail.set_results[opp][0] = 6;
+    // score_detail.set_results[you][0] = 4;
+    // score_detail.set_results[opp][1] = 6;
+    // score_detail.set_results[you][1] = 7;
+    // score_detail.set_results[opp][2] = 2;
+    // score_detail.set_results[you][2] = 6;
+    // score_detail.set_results[opp][3] = 7;
+    // score_detail.set_results[you][3] = 5;
+    // score_detail.set_results[opp][4] = 1;
+    // score_detail.set_results[you][4] = 6;
+
     float left = 5 * 26.5 / 2;
-    
+
     for (int i = 0; i < 5; ++i)
     {
         snprintf(buffer_games_opp[i], 2, "%d", score_detail.set_results[opp][i]);
@@ -84,7 +95,7 @@ static void window_unload(Window *window) {
         text_layer_destroy(s_you_sets_layer[i]);  
         s_you_sets_layer[i]=NULL;  
     }
-	
+
     window_destroy(window);
     s_stats_sets_window = NULL;
 }

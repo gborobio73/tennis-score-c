@@ -35,7 +35,7 @@ TextLayer* stats_window_common_create_and_add_title(Window *window, const char *
 
 TextLayer* stats_window_common_create_layer(GRect frame, const char * text, bool text_big){
 	TextLayer* s_text_layer = text_layer_create(frame);
-        
+    
     text_layer_set_text(s_text_layer, text);
     set_text_layer_config(s_text_layer);
     if (text_big)
@@ -49,8 +49,9 @@ TextLayer* stats_window_common_create_layer(GRect frame, const char * text, bool
 
 TextLayer* stats_window_common_create_and_add_layer(Window *window, GRect frame, const char * text, bool text_big){	
 	TextLayer* s_text_layer = stats_window_common_create_layer(frame, text, text_big);
-
+    
     Layer *window_layer = window_get_root_layer(window);    
+    
     layer_add_child(window_layer, text_layer_get_layer(s_text_layer));
 
     return s_text_layer;

@@ -63,7 +63,13 @@ static void window_load(Window *window) {
 
     MatchStatistics score_detail= match_statistics_get();
 
-    int start_from_y = 20 + PBL_IF_ROUND_ELSE(20, 10);
+    // score_detail.set_duration[0] = 45* 60;
+    // score_detail.set_duration[1] = 53 * 60;
+    // score_detail.set_duration[2] = 33 * 60;
+    // score_detail.set_duration[3] = 62 * 60;
+    // score_detail.set_duration[4] = 39 * 60;    
+
+    int start_from_y =PBL_IF_ROUND_ELSE(40, 30);
 
     int box_h = 40;
     float every_y = box_h +2;
@@ -79,7 +85,7 @@ static void window_load(Window *window) {
         APP_LOG(APP_LOG_LEVEL_DEBUG, "*** window_load  *** set %d lasted %d seconds", 
             i, (int)score_detail.set_duration[i]);
 
-        int padding = 28;
+        int padding = PBL_IF_ROUND_ELSE(64, 28);
         int box_x = padding / 2 ;
         int box_w = bounds.size.w - padding;
         s_sets_time_layer[i] = stats_window_common_create_layer(
@@ -90,7 +96,7 @@ static void window_load(Window *window) {
             match_config_is_best_of_3_sets());
 
         
-        int num_x = 2;
+        int num_x = PBL_IF_ROUND_ELSE(18, 2);;
         int num_y = start_from_y + (i * every_y) + (box_h / 4);        
         snprintf(buffer_sets_num[i], sizeof(buffer_sets_num[i]), "%d\n", i + 1);
         s_sets_num_layer[i] =create_set_num_layer(GRect(num_x, num_y, 13, 20), buffer_sets_num[i]);

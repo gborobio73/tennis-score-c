@@ -42,8 +42,10 @@ static void window_load(Window *window) {
     static char match_time_buffer [9];
     snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d:%.2d\n", 
         match_time.hours, match_time.minutes, match_time.seconds);
+    // snprintf(match_time_buffer, sizeof(match_time_buffer), "%.2d:%.2d:%.2d\n", 
+    //     4, 27, 35);
 
-    int padding = 28;
+    int padding = PBL_IF_ROUND_ELSE(64, 28);
     int box_x = padding / 2 ;
     int box_w = bounds.size.w - padding;
     int box_h = 40;
