@@ -37,11 +37,3 @@ void fonts_set_text_layer_font_stats_small(TextLayer *s_text_layer){
 	}	
     text_layer_set_font(s_text_layer, s_font_stats_small);
 }
-
-void fonts_set_text_layer_font_stats_medium(TextLayer *s_text_layer){
-	if (s_font_stats_medium)
-	{
-		s_font_stats_medium = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_STATS_19));
-	}	
-    text_layer_set_font(s_text_layer, s_font_stats_medium);
-}

@@ -33,22 +33,18 @@ TextLayer* stats_window_common_create_and_add_title(Window *window, const char *
     return s_title_layer;
 }
 
-TextLayer* stats_window_common_create_layer(GRect frame, const char * text, bool text_big){
+TextLayer* stats_window_common_create_layer(GRect frame, const char * text){
 	TextLayer* s_text_layer = text_layer_create(frame);
     
     text_layer_set_text(s_text_layer, text);
     set_text_layer_config(s_text_layer);
-    if (text_big)
-    {
-    	fonts_set_text_layer_font_stats_big(s_text_layer); 	
-    }else{
-    	fonts_set_text_layer_font_stats_medium(s_text_layer); 
-    }        
+    fonts_set_text_layer_font_stats_big(s_text_layer); 	
+    
     return s_text_layer;
 }
 
-TextLayer* stats_window_common_create_and_add_layer(Window *window, GRect frame, const char * text, bool text_big){	
-	TextLayer* s_text_layer = stats_window_common_create_layer(frame, text, text_big);
+TextLayer* stats_window_common_create_and_add_layer(Window *window, GRect frame, const char * text){	
+	TextLayer* s_text_layer = stats_window_common_create_layer(frame, text);
     
     Layer *window_layer = window_get_root_layer(window);    
     

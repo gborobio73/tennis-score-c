@@ -46,8 +46,7 @@ static void window_load(Window *window) {
             GRect(
             (bounds.size.w / 2) - (box_w / 2), (bounds.size.h / 2) - 41,
             box_w, 40), 
-            buffer_points[opp],
-            true);
+            buffer_points[opp]);
 
     snprintf(buffer_points[you], sizeof(buffer_points[you]), "%.3d", statistics.points[you]);    
     s_points_layer[you] = stats_window_common_create_and_add_layer(
@@ -55,8 +54,7 @@ static void window_load(Window *window) {
         GRect(
             (bounds.size.w / 2) - (box_w / 2), (bounds.size.h / 2) + 1,
             box_w, 40), 
-        buffer_points[you],
-        true);
+        buffer_points[you]);
     
 }
 

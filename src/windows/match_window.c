@@ -14,6 +14,13 @@
 
 static Window *s_match_window;
 
+static void show_statistics(){
+    #if !defined(PBL_PLATFORM_APLITE)    /* not available for pebble original */
+        match_statistics_calculate();        
+        stats_sets_window_push();
+    #endif      
+}
+
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
     time_layer_update_time();
     if (!match_score_is_match_over())
@@ -48,10 +55,9 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    if (match_score_is_match_over()) //Change when ready
+    if (!match_score_is_match_over()) //Change when ready
     {
-        match_statistics_calculate();        
-        stats_sets_window_push();
+        show_statistics();        
     }
     else
     {

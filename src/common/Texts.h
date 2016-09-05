@@ -20,5 +20,6 @@
 #define ALL_SCORE " all"
 #define SPACE_SCORE " "
 #define STATIC_SCORE_TEXT "Sets  Games Points"
-#define MATCHOVER_SCORE "Match over"
+#define MATCHOVER_SCORE "~ Fin. ~"
+#define MATCHOVER_SCROLL "~ Fin. Scroll down ~"
 #define QUESTION_END_MATCH "Quit match?"

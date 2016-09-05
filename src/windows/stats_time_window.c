@@ -55,7 +55,7 @@ static void window_load(Window *window) {
             GRect(
                 box_x, (bounds.size.h / 2) - (box_h / 2),
                 box_w, box_h), 
-            match_time_buffer, true);
+            match_time_buffer);
 
 }
 

@@ -67,8 +67,7 @@ static void window_load(Window *window) {
             GRect(
                 (bounds.size.w / 2) - (left - i * 27), (bounds.size.h / 2) - 41,                
                 25, 40), 
-            buffer_games_opp[i],
-            true);
+            buffer_games_opp[i]);
     }
 
     for (int i = 0; i < 5; ++i)
@@ -80,7 +79,7 @@ static void window_load(Window *window) {
             GRect(
                 (bounds.size.w / 2) - (left - i * 27), (bounds.size.h / 2) + 1,                
                 25, 40), 
-            buffer_games_you[i], true);
+            buffer_games_you[i]);
     }
 }
 

@@ -92,8 +92,7 @@ static void window_load(Window *window) {
             GRect(
                 box_x, start_from_y + (i * every_y),
                 box_w, box_h), 
-            buffer_sets_time[i],
-            match_config_is_best_of_3_sets());
+            buffer_sets_time[i]);
 
         
         int num_x = PBL_IF_ROUND_ELSE(18, 2);;
