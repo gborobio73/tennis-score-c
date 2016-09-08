@@ -27,6 +27,20 @@ static void initialize_structure(){
 	}
 }
 
+static bool is_new_set(Score score){
+	return 	score.games[opp] == 0 && 
+			score.games[you] == 0 &&
+			strcmp(score.points[opp], love) ==0 && 
+			strcmp(score.points[you], love) ==0;
+}
+
+static void calculate_games(Score previous_score, int who_won, int num_scores){
+	int games[2];
+	match_statistics->set_results[opp][num_scores] = previous_score.games[opp];
+	match_statistics->set_results[you][num_scores] = previous_score.games[you];
+	match_statistics->set_results[who_won][num_scores]++ ;
+}
+
 void match_statistics_calculate(){
 	initialize_structure();
 
@@ -36,25 +50,11 @@ void match_statistics_calculate(){
 	
 	time_t previous_set_duration= match_score.match_started;
 	
-	// APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_statistics_calculate  *** match started %ld", previous_set_duration); 
-	// APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_statistics_calculate  *** IDX %d ", match_score.current_score_idx); 
-
 	for (int i = 1; i <= match_score.current_score_idx && num_scores < match_config_get_best_of_sets(); ++i)
 	{		
-		if (match_score.scores[i].games[opp] == 0 && 
-			match_score.scores[i].games[you] == 0 &&
-			strcmp(match_score.scores[i].points[opp], love) ==0 && 
-			strcmp(match_score.scores[i].points[you], love) ==0)
+		if (is_new_set(match_score.scores[i]))
 		{
-			int score[2];
-			score[opp] = match_score.scores[i-1].games[opp];
-			score[you] = match_score.scores[i-1].games[you];
-			score[match_score.scores[i].who_won_the_point] ++ ;
-			APP_LOG(APP_LOG_LEVEL_DEBUG, "*** match_statistics_get_score_detail  *** SET %d %d, time %ld", 
-				score[opp], score[you], match_score.scores[i].time - previous_set_duration); 
-			
-			match_statistics->set_results[opp][num_scores] = score[opp];
-			match_statistics->set_results[you][num_scores] = score[you];
+			calculate_games(match_score.scores[i-1], match_score.scores[i].who_won_the_point, num_scores);
 			match_statistics->set_duration[num_scores] =match_score.scores[i].time - previous_set_duration;
 			
 			num_scores ++;
