@@ -84,6 +84,19 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
 }
 
 static void window_load(Window *window) {
+
+    #if defined(PBL_PLATFORM_APLITE) 
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "APLITE defined");
+    #elif defined(PBL_PLATFORM_BASALT) 
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "BASALT defined");
+    #elif defined(PBL_PLATFORM_CHALK)
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "CHALK defined");    
+    #elif defined(PBL_PLATFORM_DIORITE)
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "DIORITE defined");    
+    #else
+        
+    #endif  
+
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
