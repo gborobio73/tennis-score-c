@@ -55,7 +55,7 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-    if (match_score_is_match_over()) //Change when ready
+    if (match_score_is_match_over())
     {
         show_statistics();        
     }
