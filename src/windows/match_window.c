@@ -2,16 +2,24 @@
 #include "match_window.h"
 #include "dialog_choice_window.h"
 #include "dialog_message_window.h"
-#include "statistics_window.h"
+#include "stats_sets_window.h"
 #include "match_score_layer.h"
 #include "time_layer.h"
 #include "score_text_layer.h"
 #include "../match/match_configuration.h"
 #include "../match/match_score.h"
+#include "../match/match_statistics.h"
 #include "../common/const.h"
 #include "../match/score.h"
 
 static Window *s_match_window;
+
+static void show_statistics(){
+    #if !defined(PBL_PLATFORM_APLITE)    /* not available for pebble original */
+        match_statistics_calculate();        
+        stats_sets_window_push();
+    #endif      
+}
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
     time_layer_update_time();
@@ -22,8 +30,8 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {    
-    match_schore_cancel_last_point();
-    Score* score = match_schore_get_current_score(); 
+    match_score_cancel_last_point();
+    Score* score = match_score_get_current_score(); 
     match_score_layer_draw_score(score);
     score_text_layer_update_text(score);
 }
@@ -36,17 +44,20 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
     }
     else
     {
-        match_schore_oponent_point();
-        Score* score = match_schore_get_current_score(); 
-        match_score_layer_draw_score(score);
-        score_text_layer_update_text(score);
+        if (!match_score_is_match_over())
+        {
+            match_score_oponent_point();
+            Score* score = match_score_get_current_score(); 
+            match_score_layer_draw_score(score);
+            score_text_layer_update_text(score);
+        }        
     }    
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
     if (match_score_is_match_over())
     {
-        statistics_window_push();
+        show_statistics();        
     }
     else
     {
@@ -57,8 +68,8 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
         }
         else
         {
-            match_schore_your_point();
-            Score* score = match_schore_get_current_score(); 
+            match_score_your_point();
+            Score* score = match_score_get_current_score(); 
             match_score_layer_draw_score(score);
             score_text_layer_update_text(score);
         }
@@ -89,8 +100,8 @@ static void window_load(Window *window) {
     
     match_score_layer_init(window_layer);
 
-    match_schore_init(match_config_get_who_serves(), match_config_get_best_of_sets(), SCORES_INITIAL_SIZE, SCORES_MAX_SIZE);
-    Score* score = match_schore_get_current_score();
+    match_score_init(match_config_get_who_serves(), match_config_get_best_of_sets(), SCORES_INITIAL_SIZE, SCORES_MAX_SIZE);
+    Score* score = match_score_get_current_score();
 
     match_score_layer_draw_score(score);
 
@@ -108,8 +119,9 @@ static void window_unload(Window *window) {
     match_score_layer_destroy();
     time_layer_destroy();
     score_text_layer_destroy();
-    match_schore_end_match();
+    match_score_end_match();
     tick_timer_service_unsubscribe();
+    match_statistics_destroy();
 }
 
 void match_window_push() {

@@ -48,7 +48,11 @@ void score_text_layer_update_text(Score* score) {
     text[0]='\0';
     if (score->match_is_over)
     {
-        strcat(text, MATCHOVER_SCORE);
+        #if defined(PBL_PLATFORM_APLITE) 
+            strcat(text, MATCHOVER_SCORE);
+        #else
+            strcat(text, MATCHOVER_SCROLL);
+        #endif
     }
     else if (score->is_tie_break){
         strcat(text, TIEBREAK_SCORE);

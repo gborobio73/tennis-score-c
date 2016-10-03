@@ -1,0 +1,86 @@
+{
+  "version": "2.0",
+  "author": "Leeloo Inc.",
+  "private": true,
+  "dependencies": {},
+  "keywords": [
+    "pebble-app"
+  ],
+  "pebble": {
+    "sdkVersion": "3",
+    "resources": {
+      "media": [
+        {
+          "type": "bitmap",
+          "name": "CROSS",
+          "file": "images/cross.png"
+        },
+        {
+          "type": "bitmap",
+          "name": "TICK",
+          "file": "images/tick.png"
+        },
+        {
+          "type": "bitmap",
+          "name": "TENNIS_BALL",
+          "file": "images/tennis-ball.png"
+        },
+        {
+          "type": "bitmap",
+          "name": "WARNING",
+          "file": "images/warning.png"
+        },
+        {
+          "type": "bitmap",
+          "name": "CONFIRM",
+          "file": "images/confirm.png"
+        },
+        {
+          "type": "font",
+          "name": "SCORE_FONT_34",
+          "file": "fonts/digital-7.ttf"
+        },
+        {
+          "type": "font",
+          "name": "SCORE_FONT_32",
+          "file": "fonts/digital-7.ttf"
+        },
+        {
+          "type": "font",
+          "name": "SCORE_FONT_24",
+          "file": "fonts/digital-7.ttf"
+        },
+        {
+          "type": "font",
+          "name": "SCORE_FONT_20",
+          "file": "fonts/digital-7.ttf"
+        },
+        {
+          "type": "font",
+          "name": "SCORE_FONT_15",
+          "file": "fonts/digital-7.ttf"
+        }
+      ]
+    },
+    "projectType": "native",
+    "uuid": "7c318b28-ac47-464b-a16b-1424986dd961",
+    "messageKeys": {
+      "dummy": 0
+    },
+    "enableMultiJS": true,
+    "displayName": "Tennis Score",
+    "watchapp": {
+      "onlyShownOnCommunication": false,
+      "hiddenApp": false,
+      "watchface": false
+    },
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite"
+    ],
+    "capabilities": []
+  },
+  "name": "Tennis Score"
+}

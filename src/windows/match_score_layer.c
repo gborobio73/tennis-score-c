@@ -191,11 +191,19 @@ void match_score_layer_draw_score(Score* score){
 
 void match_score_layer_destroy(){
 	text_layer_destroy(match_score_layer.s_text_points_layer[opp]);	 
+	match_score_layer.s_text_points_layer[opp] = NULL;
 	text_layer_destroy(match_score_layer.s_text_points_layer[you]);	 
+	match_score_layer.s_text_points_layer[you] = NULL;
 	text_layer_destroy(match_score_layer.s_text_games_layer[opp]);	 
+	match_score_layer.s_text_games_layer[opp] = NULL;
 	text_layer_destroy(match_score_layer.s_text_games_layer[you]);	 
+	match_score_layer.s_text_games_layer[you] = NULL;
 	text_layer_destroy(match_score_layer.s_text_sets_layer[opp]);	 
+	match_score_layer.s_text_sets_layer[opp] = NULL;
 	text_layer_destroy(match_score_layer.s_text_sets_layer[you]);	 
+	match_score_layer.s_text_sets_layer[you] = NULL;
 	text_layer_destroy(match_score_layer.s_text_who_serves_layer[opp]);	 
+	match_score_layer.s_text_who_serves_layer[opp] = NULL;
 	text_layer_destroy(match_score_layer.s_text_who_serves_layer[you]);	 
+	match_score_layer.s_text_who_serves_layer[you] = NULL;
 }

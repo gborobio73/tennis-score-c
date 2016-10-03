@@ -84,6 +84,7 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
 }
 
 static void window_load(Window *window) {
+
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
