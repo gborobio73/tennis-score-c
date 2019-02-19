@@ -4,7 +4,7 @@ Do you play tennis and own a Pebble watch? Now you can keep track of the score i
 
 **Tennis Score** for Pebble tracks points, games, sets and who is serving. Check statistics at the end of the match.
 
-Please, visit [Tennis Score for pebble](https://gborobio73.github.io/2016/tennis-score-for-pebble/) to know how it works.
+Please, visit [Tennis Score for pebble](https://gborobio73.github.io/2016/10/03/tennis-score-for-pebble/) to know how it works.
 
 ## About
 
